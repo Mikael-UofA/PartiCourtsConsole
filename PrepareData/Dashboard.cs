@@ -46,7 +46,7 @@ namespace PrepareData
             catch (Exception ex)
             {
                 ChangeStatus(-1);
-                Console.WriteLine(ex.Message);
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -75,7 +75,7 @@ namespace PrepareData
             catch (Exception ex)
             {
                 ChangeStatus(-1);
-                Console.WriteLine(ex.Message);
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -107,7 +107,7 @@ namespace PrepareData
             catch (Exception ex)
             {
                 ChangeStatus(-1);
-                Console.WriteLine(ex.Message);
+                MessageBox.Show(ex.Message);
             }
             
         }
@@ -126,7 +126,7 @@ namespace PrepareData
             catch (Exception ex)
             {
                 ChangeStatus(-1);
-                Console.WriteLine(ex.Message);
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -140,7 +140,7 @@ namespace PrepareData
             catch (Exception ex)
             {
                 ChangeStatus(-1);
-                Console.WriteLine(ex.Message);
+                MessageBox.Show(ex.Message);
             }
           
         }
@@ -155,7 +155,7 @@ namespace PrepareData
             catch (Exception ex)
             {
                 ChangeStatus(-1);
-                Console.WriteLine(ex.Message);
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -171,7 +171,7 @@ namespace PrepareData
             catch (Exception ex)
             {
                 ChangeStatus(-1);
-                Console.WriteLine(ex.Message);
+                MessageBox.Show(ex.Message);
             }
         }
 
