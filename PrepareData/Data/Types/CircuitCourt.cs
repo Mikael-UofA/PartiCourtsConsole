@@ -1,7 +1,7 @@
 ﻿
 namespace PrepareData.Data.Types
 {
-    public class CurcuitCourt: ICourt
+    public class CircuitCourt: ICourt
     {
         public int Id { get; set; }
         public string Name { get; }
@@ -12,18 +12,16 @@ namespace PrepareData.Data.Types
         public int? SeniorEligibleJudges { get; set; }
         public int? DEMJudges { get; set; }
         public int? GOPJudges { get; set; }
-        public bool UpToDate { get; set; }
 
-        public CurcuitCourt(int id, string name, string supervisingJustice, int maxJudges)
+        public CircuitCourt(int id, string name, string supervisingJustice, int maxJudges)
         {
             Id = id;
             Name = name;
             SupervisingJustice = supervisingJustice;
             MaxJudges = maxJudges;
-            UpToDate = false;
         }
 
-        public CurcuitCourt(int id, string name, string supervisingJustice, string chiefJudge, int activeJudges, int maxJudges, int seniorEligibleJudges, int dem, int gop)
+        public CircuitCourt(int id, string name, string supervisingJustice, string chiefJudge, int activeJudges, int maxJudges, int seniorEligibleJudges, int dem, int gop)
         {
             Id = id;
             Name = name;

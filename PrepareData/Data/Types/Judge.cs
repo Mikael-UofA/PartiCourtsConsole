@@ -59,6 +59,12 @@ namespace PrepareData.Data.Types
         }
         public void MakePartisanship()
         {
+            // Handles the case where two different presidents appointed the judge
+            if (AppointedBy.Contains("/"))
+            {
+                AppointedBy =  AppointedBy.Split('/')[0].Trim();
+            }
+
             if (DEM_LIST.Contains(AppointedBy))
             {
                 Partisanship = 1;
@@ -69,9 +75,9 @@ namespace PrepareData.Data.Types
             }
             else
             {
-                Console.WriteLine(AppointedBy);
-                Console.WriteLine(Name);
-                Console.WriteLine(Court);
+                MessageBox.Show(AppointedBy);
+                MessageBox.Show(Name);
+                MessageBox.Show(Court.ToString());
                 throw new Exception("Judge was appointed by a president not accounted for");
             }
         }

@@ -14,11 +14,11 @@ namespace PrepareData.Data.Services
                 return connection.Query<DistrictCourt>($"SELECT * FROM DCourts").ToList();
             }
         }
-        public List<CurcuitCourt> GetCurcuitCourts()
+        public List<CircuitCourt> GetCurcuitCourts()
         {
             using (IDbConnection connection = new Microsoft.Data.SqlClient.SqlConnection(Helper.CnnVal("CourtsDB")))
             {
-                return connection.Query<CurcuitCourt>($"SELECT * FROM CCourts").ToList();
+                return connection.Query<CircuitCourt>($"SELECT * FROM CCourts").ToList();
             }
         }
         public List<Judge> GetDistrictJudges(int districtId)
@@ -35,7 +35,7 @@ namespace PrepareData.Data.Services
                 return connection.Query<Judge>($"SELECT * FROM Judges WHERE isCurcuitJudge = True AND Court = '{curcuitId}'").ToList();
             }
         }
-        public void InsertCurcuitCourts(List<CurcuitCourt> curcuitCourts)
+        public void InsertCurcuitCourts(List<CircuitCourt> curcuitCourts)
         {
             using (IDbConnection connection = new Microsoft.Data.SqlClient.SqlConnection(Helper.CnnVal("CourtsDB")))
             {
@@ -130,11 +130,11 @@ namespace PrepareData.Data.Services
                 }
             }
         }
-        public void UpdateCurcuitCourts(List<CurcuitCourt> curcuitCourts)
+        public void UpdateCurcuitCourts(List<CircuitCourt> curcuitCourts)
         {
             using (IDbConnection connection = new Microsoft.Data.SqlClient.SqlConnection(Helper.CnnVal("CourtsDB")))
             {
-                foreach (CurcuitCourt curcuitCourt in curcuitCourts)
+                foreach (CircuitCourt curcuitCourt in curcuitCourts)
                 {
                     string sqlQuery = @"
                     UPDATE CCourts 

@@ -5,13 +5,13 @@ namespace PrepareData.Data.Services
 {
     public class WikipediaScrapper
     {
-        public static async Task<List<CurcuitCourt>> GenerateCC()
+        public static async Task<List<CircuitCourt>> GenerateCC()
         {
             // Wikipedia API URL
             string baseUrl = "https://en.wikipedia.org/w/api.php";
             string pageName = "United_States_courts_of_appeals";
             string query = $"?action=parse&page={Uri.EscapeDataString(pageName)}&format=json&prop=text";
-            List<CurcuitCourt> temp = new List<CurcuitCourt>();
+            List<CircuitCourt> temp = new List<CircuitCourt>();
             using (HttpClient client = new HttpClient())
             {
                 HttpResponseMessage response = await client.GetAsync(baseUrl + query);
@@ -38,40 +38,35 @@ namespace PrepareData.Data.Services
             }
             return temp;
         }
-        private static List<CurcuitCourt> ParseCCTableFromHtml(string htmlContent)
+        private static List<CircuitCourt> ParseCCTableFromHtml(string htmlContent)
         {
             var doc = new HtmlAgilityPack.HtmlDocument();
             doc.LoadHtml(htmlContent);
-            var tables = doc.DocumentNode.SelectNodes("//table[contains(@class, 'sortable')]");
-            List<CurcuitCourt> courts = new List<CurcuitCourt>();
+            var table = doc.DocumentNode.SelectSingleNode("//table[contains(@class, 'sortable')]");
+            List<CircuitCourt> courts = new List<CircuitCourt>();
 
-            if (tables != null)
+            if (table != null)
             {
-                foreach (var table in tables)
+                var rows = table.SelectNodes("./tbody/tr");
+                rows.Remove(rows.Count - 1);
+                rows.Remove(rows.Count - 1);
+                rows.Remove(0);
+                if (rows != null)
                 {
-                    int i = 0;
-                    var rows = table.SelectNodes(".//tr");
-                    foreach (var row in rows)
+                    for (int i = 0; i < rows.Count; i++)
                     {
-                        // Skips header and the last two rows which are the federal court and total row
-                        if (i == rows.Count - 2) { continue; }
-                        if (i++ == 0) { continue; }
-
-                        var cells = row.SelectNodes(".//th|.//td");
+                        var cells = rows[i].SelectNodes("./td");
                         if (cells != null)
                         {
                             string name = cells[0].InnerText.Trim();
                             string supervisingJustice = cells[1].InnerText.Trim();
-                            int maxJudges = 0;
-                            int ccourt_id = i - 2;
-                            if (Int32.TryParse(cells[2].InnerText.Trim(), out maxJudges))
-                            {
-                                CurcuitCourt court = new CurcuitCourt(ccourt_id, name, supervisingJustice, maxJudges);
-                                courts.Add(court);
-                            }
+                            int maxJudges = Int32.Parse(cells[2].InnerText.Trim());
+                            CircuitCourt court = new CircuitCourt(i, name, supervisingJustice, maxJudges);
+                            courts.Add(court);
                         }
                     }
                 }
+                
                 return courts;
             }
             else
@@ -126,26 +121,19 @@ namespace PrepareData.Data.Services
             if (tables != null)
             {
                 var table = tables[1];
-                int i = 0;
-                var rows = table.SelectNodes(".//tr");
+                var rows = table.SelectNodes(".//tbody/tr");
                 foreach (var row in rows)
                 {
-                    // Skips header
-                    if (i++ == 0) { continue; }
-
-                    var cells = row.SelectNodes(".//th|.//td");
+                    var cells = row.SelectNodes(".//td");
                     if (cells != null)
                     {
                         string name = cells[0].InnerText.Trim();
                         string abbreviation = cells[1].InnerText.Trim();
                         string courtOfAppeal = cells[2].InnerText.Trim();
                         string chiefJudge = cells[6].InnerText.Trim();
-                        int maxJudges = 0;
-                        if (Int32.TryParse(cells[4].InnerText.Trim(), out maxJudges))
-                        {
-                            DistrictCourt court = new DistrictCourt(name, abbreviation, courtOfAppeal, maxJudges, chiefJudge);
-                            courts.Add(court);
-                        }
+                        int maxJudges = Int32.Parse(cells[4].InnerText.Trim());
+                        DistrictCourt court = new DistrictCourt(name, abbreviation, courtOfAppeal, maxJudges, chiefJudge);
+                        courts.Add(court);
                     }
                 }
                 return courts;
@@ -201,14 +189,10 @@ namespace PrepareData.Data.Services
             if (tables != null)
             {
                 var table = tables[0];
-                int i = 0;
-                var rows = table.SelectNodes(".//tr");
+                var rows = table.SelectNodes(".//tbody/tr");
                 foreach (var row in rows)
                 {
-                    // Skips header
-                    if (i++ < 2) { continue; }
-
-                    var cells = row.SelectNodes(".//th|.//td");
+                    var cells = row.SelectNodes(".//td");
                     if (cells != null)
                     {
                         string title = cells[1].InnerText.Trim();
@@ -240,7 +224,7 @@ namespace PrepareData.Data.Services
             }
         }
 
-        public static async Task<List<Judge>> GetCJudges(CurcuitCourt court)
+        public static async Task<List<Judge>> GetCJudges(CircuitCourt court)
         {
             // Wikipedia API URL
             string baseUrl = "https://en.wikipedia.org/w/api.php";
@@ -284,27 +268,27 @@ namespace PrepareData.Data.Services
             {
                 var table = tables[0];
                 int i = 0;
-                var rows = table.SelectNodes(".//tr");
+                var rows = table.SelectNodes(".//tbody/tr");
                 foreach (var row in rows)
                 {
                     // Skips header
                     if (i++ == 0) { continue; }
 
-                    var cells = row.SelectNodes(".//th|.//td");
+                    var cells = row.SelectNodes(".//td");
                     if (cells != null)
                     {
-                        string title = cells[0].InnerText.Trim();
-                        if (title != "Senior Curcuit Judge")
+                        string title = cells[1].InnerText.Trim();
+                        string name = cells[2].InnerText.Trim();
+                        if (title != "Senior Circuit Judge" && name != "vacant")
                         {
                             int birth = 0;
-                            string name = cells[1].InnerText.Trim();
                             bool isChief = (title == "Chief Judge");
-                            string appointedBy = cells[7].InnerText.Trim();
+                            string appointedBy = cells[8].InnerText.Trim();
 
-                            Int32.TryParse(cells[3].InnerText.Trim(), out birth);
-                            string temp1 = cells[4].InnerText.Trim();
-                            string temp2 = temp1.Substring(0, 4);
+                            Int32.TryParse(cells[4].InnerText.Trim(), out birth);
+                            string temp1 = cells[5].InnerText.Trim();
                             int appointmentDate = 0;
+                            string temp2 = temp1[..4];
                             Int32.TryParse(temp2, out appointmentDate);
 
                             Judge judge = new Judge(name, true, courtId, birth, title, appointedBy, appointmentDate, isChief);

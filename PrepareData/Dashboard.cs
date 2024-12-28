@@ -5,10 +5,10 @@ namespace PrepareData
 {
     public partial class Dashboard : Form
     {
-        private List<CurcuitCourt> ccourts = new List<CurcuitCourt>();
+        private List<CircuitCourt> ccourts = new List<CircuitCourt>();
         private List<DistrictCourt> dcourts = new List<DistrictCourt>();
         private List<Judge> judges = new List<Judge>();
-        private string geojsonPath = "sources/boundaries.geojson";
+        private string geojsonPath = "../../../sources/boundaries.geojson";
         private DataAccess dataAccess1 = new DataAccess();
 
         public Dashboard()
@@ -82,9 +82,9 @@ namespace PrepareData
         private async void JudgesButton_Click(object sender, EventArgs e)
         {
             ChangeStatus(0);
-            try
-            {
-                foreach (CurcuitCourt court in ccourts)
+            //try
+            //{
+                foreach (CircuitCourt court in ccourts)
                 {
                     List<Judge> returning = await WikipediaScrapper.GetCJudges(court);
                     court.ActiveJudges = returning.Count;
@@ -103,12 +103,12 @@ namespace PrepareData
                 }
                 DisableEnableButton(JudgesButton, StoreDBButton);
                 ChangeStatus(1);
-            }
-            catch (Exception ex)
-            {
-                ChangeStatus(-1);
-                MessageBox.Show(ex.Message);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    ChangeStatus(-1);
+            //    MessageBox.Show(ex.Message);
+            //}
             
         }
 
@@ -175,16 +175,20 @@ namespace PrepareData
             }
         }
 
-        private async void DropTablesButton_Click(object sender, EventArgs e)
+        private void DropTablesButton_Click(object sender, EventArgs e)
         {
             //DataAccess dataAccess = new DataAccess();
             //dataAccess.ClearTable("Judges");
             //dataAccess.ClearTable("DCourts");
             //dataAccess.ClearTable("CCourts");
 
-            ChangeStatus(0);
-            await Task.Delay(2000);
-            ChangeStatus(1);
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string projectRoot = Path.Combine(currentDirectory, "..", "..", "..");
+            MessageBox.Show($"Current working directory: {projectRoot}");
+            foreach (string dir in Directory.GetDirectories(projectRoot))
+            {
+                MessageBox.Show(Path.GetFileName(dir));
+            }
 
         }
         private void ChangeStatus(int statusCode)
@@ -214,7 +218,7 @@ namespace PrepareData
             judges = new List<Judge>();
             try 
             {
-                foreach (CurcuitCourt curcuit in ccourts)
+                foreach (CircuitCourt curcuit in ccourts)
                 {
                     List<Judge> returning = await WikipediaScrapper.GetCJudges(curcuit);
                     curcuit.ActiveJudges = returning.Count;

@@ -14,8 +14,6 @@ namespace PrepareData.Data.Types
         public int? SeniorEligibleJudges { get; set; }
         public int? DEMJudges { get; set; }
         public int? GOPJudges { get; set; }
-        public bool UpToDate { get; set; }
-
 
         public DistrictCourt(string name, string abbreviation, string courtOfAppeal, int maxJudges, string chiefJudge)
         {
@@ -24,7 +22,6 @@ namespace PrepareData.Data.Types
             MaxJudges = maxJudges;
             ChiefJudge = chiefJudge;
             MakeAppeal(courtOfAppeal);
-            UpToDate = false;
         }
         public DistrictCourt(int id, string name, string abbreviation, int courtOfAppeal, int activeJudges, int maxJudges, string chiefJudge, int seniorEligibleJudges, int dem, int gop)
         {
