@@ -40,9 +40,9 @@ namespace PrepareData.Data.Services
             using (IDbConnection connection = new Microsoft.Data.SqlClient.SqlConnection(Helper.CnnVal("CourtsDB")))
             {
                 string sqlQuery = @"INSERT INTO CCourts 
-            (Id, Name, SupervisingJustice, ActiveJudges, MaxJudges, ChiefJudge, SeniorEligibleJudges, Population, DEMJudges, GOPJudges) 
+            (Id, Name, SupervisingJustice, ActiveJudges, MaxJudges, ChiefJudge, SeniorEligibleJudges, DEMJudges, GOPJudges) 
             VALUES 
-            (@Id, @Name, @SupervisingJustice, @ActiveJudges, @MaxJudges, @ChiefJudge, @SeniorEligibleJudges, @Population, @DEMJudges, @GOPJudges)";
+            (@Id, @Name, @SupervisingJustice, @ActiveJudges, @MaxJudges, @ChiefJudge, @SeniorEligibleJudges, @DEMJudges, @GOPJudges)";
 
                 connection.Execute(sqlQuery, curcuitCourts);
             }
@@ -52,7 +52,7 @@ namespace PrepareData.Data.Services
         {
             using (IDbConnection connection = new Microsoft.Data.SqlClient.SqlConnection(Helper.CnnVal("CourtsDB")))
             {
-                string sqlQuery = @"INSERT INTO Courts 
+                string sqlQuery = @"INSERT INTO DCourts 
             (Id, Name, Abbreviation, CourtOfAppeal, ActiveJudges, MaxJudges, ChiefJudge, SeniorEligibleJudges, DEMJudges, GOPJudges) 
             VALUES 
             (@Id, @Name, @Abbreviation, @CourtOfAppeal, @ActiveJudges, @MaxJudges, @ChiefJudge, @SeniorEligibleJudges, @DEMJudges, @GOPJudges)";
@@ -101,7 +101,7 @@ namespace PrepareData.Data.Services
                 }
                 catch
                 {
-                    Console.WriteLine("Table not found");
+                    MessageBox.Show("Table not found");
                 }
 
             }

@@ -57,17 +57,9 @@ namespace PrepareData
             {
                 dcourts = await WikipediaScrapper.GenerateDC();
                 List<int> remove = new List<int> { 74, 61, 86 };
-                for (int i = 0; i < dcourts.Count; i++)
+                foreach (DistrictCourt dcourt in dcourts)
                 {
-                    if (!dcourts[i].SetIdFromGeoJson(geojsonPath))
-                    {
-                        Console.WriteLine("A failure occurred when retrieving ID of some district court");
-                        break;
-                    }
-                    if (remove.Contains(dcourts[i].Id))
-                    {
-                        dcourts.RemoveAt(i);
-                    }
+                    dcourt.SetIdFromGeoJson(geojsonPath);
                 }
                 DisableEnableButton(DCourtsButton, JudgesButton);
                 ChangeStatus(1);
@@ -177,18 +169,11 @@ namespace PrepareData
 
         private void DropTablesButton_Click(object sender, EventArgs e)
         {
-            //DataAccess dataAccess = new DataAccess();
-            //dataAccess.ClearTable("Judges");
-            //dataAccess.ClearTable("DCourts");
-            //dataAccess.ClearTable("CCourts");
-
-            string currentDirectory = Directory.GetCurrentDirectory();
-            string projectRoot = Path.Combine(currentDirectory, "..", "..", "..");
-            MessageBox.Show($"Current working directory: {projectRoot}");
-            foreach (string dir in Directory.GetDirectories(projectRoot))
-            {
-                MessageBox.Show(Path.GetFileName(dir));
-            }
+            ChangeStatus(0);
+            dataAccess1.ClearTable("Judges");
+            dataAccess1.ClearTable("DCourts");
+            dataAccess1.ClearTable("CCourts");
+            ChangeStatus(1);
 
         }
         private void ChangeStatus(int statusCode)

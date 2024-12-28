@@ -100,7 +100,7 @@ namespace PrepareData.Data.Types
         }
 
 
-        public bool SetIdFromGeoJson(string path)
+        public void SetIdFromGeoJson(string path)
         {
             string geoJsonContent = File.ReadAllText(path);
             JObject geoJson = JObject.Parse(geoJsonContent);
@@ -113,22 +113,20 @@ namespace PrepareData.Data.Types
                     {
                         var properties = feature["properties"];
 
-                        if (properties != null && properties["NAME"]?.ToString() == Name)
+                        if (properties != null && properties["NAME"].ToString() == Name)
                         {
-                            int temp = 0;
-                            bool temp2 = int.TryParse(properties["FID"]?.ToString(), out temp);
-
-                            if (temp2)
+                            if (properties["FID"].ToString() != null)
                             {
-                                Id = temp;
+                                Id = Int32.Parse(properties["FID"].ToString());
+                                return;
+
                             }
-                            return temp2;
                         }
                     }
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
                 }
             }
-            return false;
+            throw new Exception($"Couldn't generate ID of {Name}");
 
         }
     }

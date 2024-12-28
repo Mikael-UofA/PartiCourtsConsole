@@ -8,7 +8,6 @@ namespace PrepareData.Data.Services
     {
         public static string CnnVal(string name)
         {
-            Console.WriteLine(ConfigurationManager.ConnectionStrings[name].ConnectionString);
             return ConfigurationManager.ConnectionStrings[name].ConnectionString;
         }
 
@@ -17,7 +16,7 @@ namespace PrepareData.Data.Services
             using (var connection = new Microsoft.Data.SqlClient.SqlConnection(Helper.CnnVal("CourtsDB")))
             {
                 connection.Open();
-                Console.WriteLine("Connection successful!");
+                MessageBox.Show("Connection successful!");
             }
         }
         public static void InsertDB()

@@ -28,12 +28,12 @@ namespace PrepareData.Data.Services
                     }
                     else
                     {
-                        Console.WriteLine("No content found for the page.");
+                        MessageBox.Show("No content found for the page.");
                     }
                 }
                 else
                 {
-                    Console.WriteLine($"Error: {response.StatusCode}");
+                    MessageBox.Show($"Error: {response.StatusCode}");
                 }
             }
             return temp;
@@ -71,7 +71,7 @@ namespace PrepareData.Data.Services
             }
             else
             {
-                Console.WriteLine("No tables found in the HTML.");
+                MessageBox.Show("No tables found in the HTML.");
                 return courts;
             }
         }
@@ -100,12 +100,12 @@ namespace PrepareData.Data.Services
                     }
                     else
                     {
-                        Console.WriteLine("No content found for the page.");
+                        MessageBox.Show("No content found for the page.");
                     }
                 }
                 else
                 {
-                    Console.WriteLine($"Error: {response.StatusCode}");
+                    MessageBox.Show($"Error: {response.StatusCode}");
                 }
             }
             return temp;
@@ -117,7 +117,8 @@ namespace PrepareData.Data.Services
             doc.LoadHtml(htmlContent);
             var tables = doc.DocumentNode.SelectNodes("//table[contains(@class, 'sortable')]");
             List<DistrictCourt> courts = new List<DistrictCourt>();
-
+            List<string> territorialCourts = new List<string> { "District of Guam", 
+                "District of the Northern Mariana Islands", "District of the Virgin Islands" };
             if (tables != null)
             {
                 var table = tables[1];
@@ -129,19 +130,22 @@ namespace PrepareData.Data.Services
                     if (cells != null)
                     {
                         string name = cells[0].InnerText.Trim();
-                        string abbreviation = cells[1].InnerText.Trim();
-                        string courtOfAppeal = cells[2].InnerText.Trim();
-                        string chiefJudge = cells[6].InnerText.Trim();
-                        int maxJudges = Int32.Parse(cells[4].InnerText.Trim());
-                        DistrictCourt court = new DistrictCourt(name, abbreviation, courtOfAppeal, maxJudges, chiefJudge);
-                        courts.Add(court);
+                        if (! territorialCourts.Contains(name))
+                        {
+                            string abbreviation = cells[1].InnerText.Trim();
+                            string courtOfAppeal = cells[2].InnerText.Trim();
+                            string chiefJudge = cells[6].InnerText.Trim();
+                            int maxJudges = Int32.Parse(cells[4].InnerText.Trim());
+                            DistrictCourt court = new DistrictCourt(name, abbreviation, courtOfAppeal, maxJudges, chiefJudge);
+                            courts.Add(court);
+                        }
                     }
                 }
                 return courts;
             }
             else
             {
-                Console.WriteLine("No tables found in the HTML.");
+                MessageBox.Show("No tables found in the HTML.");
                 return courts;
             }
         }
@@ -166,21 +170,21 @@ namespace PrepareData.Data.Services
 
                     if (!string.IsNullOrEmpty(htmlContent))
                     {
-                        return ParseDJTableFromHtml(htmlContent, court.Id);
+                        return ParseDJTableFromHtml(htmlContent, court);
                     }
                     else
                     {
-                        Console.WriteLine("No content found for the page.");
+                        MessageBox.Show("No content found for the page.");
                     }
                 }
                 else
                 {
-                    Console.WriteLine($"Error: {response.StatusCode}");
+                    MessageBox.Show($"Error: {response.StatusCode}");
                 }
             }
             return temp;
         }
-        private static List<Judge> ParseDJTableFromHtml(string htmlContent, int courtId)
+        private static List<Judge> ParseDJTableFromHtml(string htmlContent, DistrictCourt court)
         {
             var doc = new HtmlAgilityPack.HtmlDocument();
             doc.LoadHtml(htmlContent);
@@ -199,7 +203,7 @@ namespace PrepareData.Data.Services
                     {
                         string title = cells[1].InnerText.Trim();
                         string name = cells[2].InnerText.Trim();
-                        if (title != "Senior Judge" && name != "vacant")
+                        if (title != "Senior Judge" && name != "vacant" && cells[5].InnerText.Trim()[..3] != "beg")
                         {
                             int birth = 0;
                             bool isChief = (title == "Chief Judge");
@@ -207,11 +211,11 @@ namespace PrepareData.Data.Services
 
                             Int32.TryParse(cells[4].InnerText.Trim(), out birth);
                             string temp1 = cells[5].InnerText.Trim();
-                            string temp2 = temp1.Substring(0, 4);
+                            string temp2 = temp1[..4];
                             int appointmentDate = 0;
                             Int32.TryParse(temp2, out appointmentDate);
 
-                            Judge judge = new Judge(name, false, courtId, birth, title, appointedBy, appointmentDate, isChief);
+                            Judge judge = new Judge(name, false, court.Id, birth, title, appointedBy, appointmentDate, isChief);
                             judges.Add(judge);
                         }
                     }
@@ -220,8 +224,8 @@ namespace PrepareData.Data.Services
             }
             else
             {
-                Console.WriteLine(courtId);
-                Console.WriteLine("No tables found in the HTML.");
+                MessageBox.Show(court.Name);
+                MessageBox.Show("No tables found in the HTML.");
                 return judges;
             }
         }
@@ -249,12 +253,12 @@ namespace PrepareData.Data.Services
                     }
                     else
                     {
-                        Console.WriteLine("No content found for the page.");
+                        MessageBox.Show("No content found for the page.");
                     }
                 }
                 else
                 {
-                    Console.WriteLine($"Error: {response.StatusCode}");
+                    MessageBox.Show($"Error: {response.StatusCode}");
                 }
             }
             return temp;
@@ -280,7 +284,7 @@ namespace PrepareData.Data.Services
                     {
                         string title = cells[1].InnerText.Trim();
                         string name = cells[2].InnerText.Trim();
-                        if (title != "Senior Circuit Judge" && name != "vacant")
+                        if (title != "Senior Circuit Judge" && name != "vacant" && cells[5].InnerText.Trim()[..3] != "beg")
                         {
                             int birth = 0;
                             bool isChief = (title == "Chief Judge");
@@ -301,7 +305,7 @@ namespace PrepareData.Data.Services
             }
             else
             {
-                Console.WriteLine("No tables found in the HTML.");
+                MessageBox.Show("No tables found in the HTML.");
                 return judges;
             }
         }
