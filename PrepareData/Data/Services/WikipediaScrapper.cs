@@ -271,11 +271,10 @@ namespace PrepareData.Data.Services
                 var table = tables[0];
                 int i = 0;
                 var rows = table.SelectNodes(".//tbody/tr");
+                rows.Remove(0);
+                rows.Remove(0);
                 foreach (var row in rows)
                 {
-                    // Skips header
-                    if (i++ == 0) { continue; }
-
                     var cells = row.SelectNodes(".//td");
                     if (cells != null)
                     {
