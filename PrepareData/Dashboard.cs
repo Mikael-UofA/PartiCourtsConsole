@@ -82,8 +82,8 @@ namespace PrepareData
         private async void JudgesButton_Click(object sender, EventArgs e)
         {
             ChangeStatus(0);
-            //try
-            //{
+            try
+            {
                 foreach (CircuitCourt court in ccourts)
                 {
                     List<Judge> returning = await WikipediaScrapper.GetCJudges(court);
@@ -103,13 +103,13 @@ namespace PrepareData
                 }
                 DisableEnableButton(JudgesButton, StoreDBButton);
                 ChangeStatus(1);
-            //}
-            //catch (Exception ex)
-            //{
-            //    ChangeStatus(-1);
-            //    MessageBox.Show(ex.Message);
-            //}
-            
+            }
+            catch (Exception ex)
+            {
+                ChangeStatus(-1);
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private void StoreDBButton_Click(object sender, EventArgs e)

@@ -121,10 +121,11 @@ namespace PrepareData.Data.Services
             if (tables != null)
             {
                 var table = tables[1];
-                var rows = table.SelectNodes(".//tbody/tr");
+                var rows = table.SelectNodes("./tbody/tr");
+                rows.Remove(0);
                 foreach (var row in rows)
                 {
-                    var cells = row.SelectNodes(".//td");
+                    var cells = row.SelectNodes("./td");
                     if (cells != null)
                     {
                         string name = cells[0].InnerText.Trim();
@@ -183,16 +184,17 @@ namespace PrepareData.Data.Services
         {
             var doc = new HtmlAgilityPack.HtmlDocument();
             doc.LoadHtml(htmlContent);
-            var tables = doc.DocumentNode.SelectNodes("//table[contains(@class, 'sortable')]");
+            var table = doc.DocumentNode.SelectSingleNode("//table[contains(@class, 'sortable')]");
             List<Judge> judges = new List<Judge>();
 
-            if (tables != null)
+            if (table != null)
             {
-                var table = tables[0];
-                var rows = table.SelectNodes(".//tbody/tr");
+                var rows = table.SelectNodes("./tbody/tr");
+                rows.Remove(0);
+                rows.Remove(0);
                 foreach (var row in rows)
                 {
-                    var cells = row.SelectNodes(".//td");
+                    var cells = row.SelectNodes("./td");
                     if (cells != null)
                     {
                         string title = cells[1].InnerText.Trim();
