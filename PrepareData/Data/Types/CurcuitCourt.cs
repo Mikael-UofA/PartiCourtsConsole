@@ -3,7 +3,7 @@ namespace PrepareData.Data.Types
 {
     public class CurcuitCourt: ICourt
     {
-        public int Id { get; }
+        public int Id { get; set; }
         public string Name { get; }
         public string SupervisingJustice { get; }
         public int? ActiveJudges { get; set; }
@@ -12,6 +12,7 @@ namespace PrepareData.Data.Types
         public int? SeniorEligibleJudges { get; set; }
         public int? DEMJudges { get; set; }
         public int? GOPJudges { get; set; }
+        public bool UpToDate { get; set; }
 
         public CurcuitCourt(int id, string name, string supervisingJustice, int maxJudges)
         {
@@ -19,6 +20,7 @@ namespace PrepareData.Data.Types
             Name = name;
             SupervisingJustice = supervisingJustice;
             MaxJudges = maxJudges;
+            UpToDate = false;
         }
 
         public CurcuitCourt(int id, string name, string supervisingJustice, string chiefJudge, int activeJudges, int maxJudges, int seniorEligibleJudges, int dem, int gop)
@@ -34,7 +36,7 @@ namespace PrepareData.Data.Types
             GOPJudges = gop;
         }
 
-        public int GetNumberofVacancies()
+        public int GetNumberOfVacancies()
         {
             if (ActiveJudges != null)
             {
@@ -54,6 +56,30 @@ namespace PrepareData.Data.Types
                 }
             }
             GOPJudges = ActiveJudges - DEMJudges;
+        }
+
+        public void FindChiefJudge(List<Judge> judges)
+        {
+            foreach (Judge judge in judges)
+            {
+                if (judge.IsChief)
+                {
+                    ChiefJudge = judge.Name;
+                    break;
+                }
+            }
+        }
+
+        public void FindNumOfSeniorEligibles(List<Judge> judges)
+        {
+            SeniorEligibleJudges = 0;
+            foreach(Judge judge in judges)
+            {
+                if (judge.IsEligibleSeniorStatus())
+                {
+                    SeniorEligibleJudges++;
+                }
+            }
         }
 
         public string GetNoWhiteSpace()

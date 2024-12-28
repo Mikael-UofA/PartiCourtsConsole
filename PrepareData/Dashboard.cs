@@ -1,16 +1,16 @@
 using PrepareData.Data.Services;
 using PrepareData.Data.Types;
-using System.IO;
-using System.Timers;
 
 namespace PrepareData
 {
     public partial class Dashboard : Form
     {
         private List<CurcuitCourt> ccourts = new List<CurcuitCourt>();
-        private List<DistrictCourt> dcourts  = new List<DistrictCourt>();
+        private List<DistrictCourt> dcourts = new List<DistrictCourt>();
         private List<Judge> judges = new List<Judge>();
         private string geojsonPath = "sources/boundaries.geojson";
+        private DataAccess dataAccess1 = new DataAccess();
+
         public Dashboard()
         {
             InitializeComponent();
@@ -33,67 +33,146 @@ namespace PrepareData
                 nextButton.Cursor = Cursors.Default;
             }
         }
+
         private async void CCourtsButton_Click(object sender, EventArgs e)
         {
-            ccourts = await WikipediaScrapper.GenerateCC();
-            DisableEnableButton(CCourtsButton, DCourtsButton);
+            ChangeStatus(0);
+            try
+            {
+                ccourts = await WikipediaScrapper.GenerateCC();
+                DisableEnableButton(CCourtsButton, DCourtsButton);
+                ChangeStatus(1);
+            }
+            catch (Exception ex)
+            {
+                ChangeStatus(-1);
+                Console.WriteLine(ex.Message);
+            }
         }
+
         private async void DCourtsButton_Click(object sender, EventArgs e)
         {
-            dcourts = await WikipediaScrapper.GenerateDC();
-
-            List<int> remove = new List<int> { 74, 61, 86 };
-            for (int i = 0; i < dcourts.Count; i++)
+            ChangeStatus(0);
+            try
             {
-                if (!dcourts[i].SetIdFromGeoJson(geojsonPath))
+                dcourts = await WikipediaScrapper.GenerateDC();
+                List<int> remove = new List<int> { 74, 61, 86 };
+                for (int i = 0; i < dcourts.Count; i++)
                 {
-                    Console.WriteLine("A failure occurred when retrieving ID of some district court");
-                    break;
+                    if (!dcourts[i].SetIdFromGeoJson(geojsonPath))
+                    {
+                        Console.WriteLine("A failure occurred when retrieving ID of some district court");
+                        break;
+                    }
+                    if (remove.Contains(dcourts[i].Id))
+                    {
+                        dcourts.RemoveAt(i);
+                    }
                 }
-                if (remove.Contains(dcourts[i].Id))
-                {
-                    dcourts.RemoveAt(i);
-                }
+                DisableEnableButton(DCourtsButton, JudgesButton);
+                ChangeStatus(1);
             }
-            DisableEnableButton(DCourtsButton, JudgesButton);
+            catch (Exception ex)
+            {
+                ChangeStatus(-1);
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private async void JudgesButton_Click(object sender, EventArgs e)
         {
-            foreach (CurcuitCourt court in ccourts)
+            ChangeStatus(0);
+            try
             {
-                List<Judge> returning = await WikipediaScrapper.GetCJudges(court);
-                judges.AddRange(returning);
+                foreach (CurcuitCourt court in ccourts)
+                {
+                    List<Judge> returning = await WikipediaScrapper.GetCJudges(court);
+                    court.ActiveJudges = returning.Count;
+                    court.FindPartisanshipOfCourt(returning);
+                    court.FindChiefJudge(returning);
+                    court.FindNumOfSeniorEligibles(returning);
+                    judges.AddRange(returning);
+                }
+                foreach (DistrictCourt court in dcourts)
+                {
+                    List<Judge> returning = await WikipediaScrapper.GetDJudges(court);
+                    court.ActiveJudges = returning.Count;
+                    court.FindPartisanshipOfCourt(returning);
+                    court.FindNumOfSeniorEligibles(returning);
+                    judges.AddRange(returning);
+                }
+                DisableEnableButton(JudgesButton, StoreDBButton);
+                ChangeStatus(1);
             }
-            foreach (DistrictCourt court in dcourts)
+            catch (Exception ex)
             {
-                List<Judge> returning = await WikipediaScrapper.GetDJudges(court);
-                judges.AddRange(returning);
+                ChangeStatus(-1);
+                Console.WriteLine(ex.Message);
             }
-            DisableEnableButton(JudgesButton, StoreDBButton);
+            
         }
 
         private void StoreDBButton_Click(object sender, EventArgs e)
         {
-            DisableEnableButton(StoreDBButton, null);
+            ChangeStatus(0);
+            try
+            {
+                dataAccess1.InsertCurcuitCourts(ccourts);
+                dataAccess1.InsertDistrictCourts(dcourts);
+                dataAccess1.InsertJudges(judges);
+                DisableEnableButton(StoreDBButton, null);
+                ChangeStatus(1);
+            }
+            catch (Exception ex)
+            {
+                ChangeStatus(-1);
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private void TestConnButton_Click(object sender, EventArgs e)
         {
-            Helper.DemoDB();
-            TestConnButton.Text = "OK";
+            try
+            {
+                Helper.DemoDB();
+                ChangeStatus(1);
+            }
+            catch (Exception ex)
+            {
+                ChangeStatus(-1);
+                Console.WriteLine(ex.Message);
+            }
+          
         }
 
         private void DemoIntButton_Click(object sender, EventArgs e)
         {
-            Helper.InsertDB();
+            try
+            {
+                Helper.InsertDB();
+                ChangeStatus(1);
+            }
+            catch (Exception ex)
+            {
+                ChangeStatus(-1);
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private void DemoDelButton_Click(object sender, EventArgs e)
         {
-            Judge test = new Judge("Demo", true, 3, 1979, "Chief Judge", "Obama", 2014, true);
-            DataAccess dataAccess = new DataAccess();
-            dataAccess.DeleteJudge(test);
+            try
+            {
+                Judge test = new Judge("Demo", true, 3, 1979, "Chief Judge", "Obama", 2014, true);
+                DataAccess dataAccess = new DataAccess();
+                dataAccess.DeleteJudge(test);
+                ChangeStatus(1);
+            }
+            catch (Exception ex)
+            {
+                ChangeStatus(-1);
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private async void DropTablesButton_Click(object sender, EventArgs e)
@@ -127,5 +206,47 @@ namespace PrepareData
             StatusBox.Text = text + code;
         }
 
+        private async void UpdateTabsButton_Click(object sender, EventArgs e)
+        {
+            ChangeStatus(0);
+            ccourts = dataAccess1.GetCurcuitCourts();
+            dcourts = dataAccess1.GetDistrictCourts();
+            judges = new List<Judge>();
+            try 
+            {
+                foreach (CurcuitCourt curcuit in ccourts)
+                {
+                    List<Judge> returning = await WikipediaScrapper.GetCJudges(curcuit);
+                    curcuit.ActiveJudges = returning.Count;
+                    curcuit.FindPartisanshipOfCourt(returning);
+                    curcuit.FindChiefJudge(returning);
+                    curcuit.FindNumOfSeniorEligibles(returning);
+                    judges.AddRange(returning);
+
+                }
+                foreach (DistrictCourt district in dcourts)
+                {
+                    List<Judge> returning = await WikipediaScrapper.GetDJudges(district);
+                    district.ActiveJudges = returning.Count;
+                    district.FindPartisanshipOfCourt(returning);
+                    district.FindChiefJudge(returning);
+                    district.FindNumOfSeniorEligibles(returning);
+                    judges.AddRange(returning);
+                }
+
+                dataAccess1.ClearTable("Judges");
+                dataAccess1.InsertJudges(judges);
+                dataAccess1.UpdateCurcuitCourts(ccourts);
+                dataAccess1.UpdateDistrictCourts(dcourts);
+                ChangeStatus(1);
+            }
+            catch
+            {
+                ChangeStatus(-1);
+            }
+                
+                
+
+        }
     }
 }

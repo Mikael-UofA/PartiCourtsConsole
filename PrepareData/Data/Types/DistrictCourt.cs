@@ -10,21 +10,21 @@ namespace PrepareData.Data.Types
         public int CourtOfAppeal { get; private set; }
         public int? ActiveJudges { get; set; }
         public int MaxJudges { get; }
-        public string ChiefJudge { get; set; }
+        public string? ChiefJudge { get; set; }
         public int? SeniorEligibleJudges { get; set; }
         public int? DEMJudges { get; set; }
         public int? GOPJudges { get; set; }
+        public bool UpToDate { get; set; }
 
 
         public DistrictCourt(string name, string abbreviation, string courtOfAppeal, int maxJudges, string chiefJudge)
         {
             Name = name;
-            ActiveJudges = null;
             Abbreviation = abbreviation;
             MaxJudges = maxJudges;
             ChiefJudge = chiefJudge;
-            SeniorEligibleJudges = null;
             MakeAppeal(courtOfAppeal);
+            UpToDate = false;
         }
         public DistrictCourt(int id, string name, string abbreviation, int courtOfAppeal, int activeJudges, int maxJudges, string chiefJudge, int seniorEligibleJudges, int dem, int gop)
         {
@@ -71,6 +71,30 @@ namespace PrepareData.Data.Types
                 }
             }
             GOPJudges = ActiveJudges - DEMJudges;
+        }
+
+        public void FindChiefJudge(List<Judge> judges)
+        {
+            foreach (Judge judge in judges)
+            {
+                if (judge.IsChief)
+                {
+                    ChiefJudge = judge.Name;
+                    break;
+                }
+            }
+        }
+
+        public void FindNumOfSeniorEligibles(List<Judge> judges)
+        {
+            SeniorEligibleJudges = 0;
+            foreach (Judge judge in judges)
+            {
+                if (judge.IsEligibleSeniorStatus())
+                {
+                    SeniorEligibleJudges++;
+                }
+            }
         }
 
         public string GetNoWhiteSpace()

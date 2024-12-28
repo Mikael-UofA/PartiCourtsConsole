@@ -38,7 +38,7 @@ namespace PrepareData.Data.Types
         {
             return DateTime.Now.Year - AppointmentYear;
         }
-        public bool eligibleSeniorStatus()
+        public bool IsEligibleSeniorStatus()
         {
             if (getAge() >= RETIREMENT_AGE)
             {

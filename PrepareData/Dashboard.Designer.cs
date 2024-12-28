@@ -37,6 +37,7 @@
             DemoDelButton = new Button();
             DropTablesButton = new Button();
             StatusBox = new RichTextBox();
+            UpdateTabsButton = new Button();
             SuspendLayout();
             // 
             // CCourtsButton
@@ -103,7 +104,7 @@
             // DemoIntButton
             // 
             DemoIntButton.BackColor = Color.RosyBrown;
-            DemoIntButton.Location = new Point(456, 383);
+            DemoIntButton.Location = new Point(456, 321);
             DemoIntButton.Name = "DemoIntButton";
             DemoIntButton.Size = new Size(118, 55);
             DemoIntButton.TabIndex = 5;
@@ -114,9 +115,9 @@
             // DemoDelButton
             // 
             DemoDelButton.BackColor = Color.RosyBrown;
-            DemoDelButton.Location = new Point(336, 383);
+            DemoDelButton.Location = new Point(456, 382);
             DemoDelButton.Name = "DemoDelButton";
-            DemoDelButton.Size = new Size(114, 55);
+            DemoDelButton.Size = new Size(118, 55);
             DemoDelButton.TabIndex = 6;
             DemoDelButton.Text = "Delete Demo";
             DemoDelButton.UseVisualStyleBackColor = false;
@@ -146,11 +147,25 @@
             StatusBox.TabIndex = 8;
             StatusBox.Text = "Status: ";
             // 
+            // UpdateTabsButton
+            // 
+            UpdateTabsButton.BackColor = Color.DarkGray;
+            UpdateTabsButton.Font = new Font("Verdana", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            UpdateTabsButton.ForeColor = Color.Teal;
+            UpdateTabsButton.Location = new Point(239, 250);
+            UpdateTabsButton.Name = "UpdateTabsButton";
+            UpdateTabsButton.Size = new Size(211, 186);
+            UpdateTabsButton.TabIndex = 9;
+            UpdateTabsButton.Text = "Update All Tables";
+            UpdateTabsButton.UseVisualStyleBackColor = false;
+            UpdateTabsButton.Click += UpdateTabsButton_Click;
+            // 
             // Dashboard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(UpdateTabsButton);
             Controls.Add(StatusBox);
             Controls.Add(DropTablesButton);
             Controls.Add(DemoDelButton);
@@ -177,5 +192,6 @@
         private Button DemoDelButton;
         private Button DropTablesButton;
         private RichTextBox StatusBox;
+        private Button UpdateTabsButton;
     }
 }

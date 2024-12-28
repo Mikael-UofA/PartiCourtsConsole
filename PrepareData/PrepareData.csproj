@@ -16,4 +16,8 @@
     <PackageReference Include="System.Threading.Timer" Version="4.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="sources\" />
+  </ItemGroup>
+
 </Project>

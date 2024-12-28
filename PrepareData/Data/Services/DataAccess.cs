@@ -82,7 +82,12 @@ namespace PrepareData.Data.Services
             WHERE Name = @Name 
             AND Court = @Court 
             AND AppointedBy = @AppointedBy";
-                connection.Execute(sqlQuery, new { judge.Name, judge.Court, judge.AppointedBy });
+                connection.Execute(sqlQuery, new 
+                { 
+                    judge.Name, 
+                    judge.Court, 
+                    judge.AppointedBy 
+                });
             }
         }
         public void ClearTable(string tableName)
@@ -113,7 +118,15 @@ namespace PrepareData.Data.Services
                     SeniorEligibleJudges = @SeniorEligibleJudges, DEMJudges = @DEMJudges,
                     GOPJudges = @GOPJudges
                     WHERE Id = @Id";
-                    connection.Execute(sqlQuery, districtCourt);
+                    connection.Execute(sqlQuery, new
+                    {
+                        districtCourt.ActiveJudges,
+                        districtCourt.ChiefJudge,
+                        districtCourt.SeniorEligibleJudges,
+                        districtCourt.DEMJudges,
+                        districtCourt.GOPJudges,
+                        districtCourt.Id
+                    });
                 }
             }
         }
@@ -129,7 +142,15 @@ namespace PrepareData.Data.Services
                     SeniorEligibleJudges = @SeniorEligibleJudges, DEMJudges = @DEMJudges,
                     GOPJudges = @GOPJudges
                     WHERE Id = @Id";
-                    connection.Execute(sqlQuery, curcuitCourt);
+                    connection.Execute(sqlQuery, new 
+                    { 
+                        curcuitCourt.ActiveJudges, 
+                        curcuitCourt.ChiefJudge, 
+                        curcuitCourt.SeniorEligibleJudges, 
+                        curcuitCourt.DEMJudges, 
+                        curcuitCourt.GOPJudges, 
+                        curcuitCourt.Id 
+                    });
                 }
             }
         }
