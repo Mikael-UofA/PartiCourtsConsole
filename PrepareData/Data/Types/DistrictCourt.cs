@@ -8,22 +8,25 @@ namespace PrepareData.Data.Types
         public string Name { get; }
         public string Abbreviation { get; }
         public int CourtOfAppeal { get; private set; }
-        public int? ActiveJudges { get; set; }
+        public int ActiveJudges { get; set; }
         public int MaxJudges { get; }
-        public string? ChiefJudge { get; set; }
-        public int? SeniorEligibleJudges { get; set; }
-        public int? DEMJudges { get; set; }
-        public int? GOPJudges { get; set; }
+        public string ChiefJudge { get; set; }
+        public int SeniorEligibleJudges { get; set; }
+        public int DEMJudges { get; set; }
+        public int GOPJudges { get; set; }
 
+        public DistrictCourt() { }
         public DistrictCourt(string name, string abbreviation, string courtOfAppeal, int maxJudges, string chiefJudge)
         {
             Name = name;
             Abbreviation = abbreviation;
             MaxJudges = maxJudges;
             ChiefJudge = chiefJudge;
+            ActiveJudges = 0;
             MakeAppeal(courtOfAppeal);
         }
-        public DistrictCourt(int id, string name, string abbreviation, int courtOfAppeal, int activeJudges, int maxJudges, string chiefJudge, int seniorEligibleJudges, int dem, int gop)
+        public DistrictCourt(Int32 id, String name, String abbreviation, Int32 courtOfAppeal, Int32 activeJudges, 
+            Int32 maxJudges, String chiefJudge, Int32 seniorEligibleJudges, Int32 dem, Int32 gop)
         {
             Id = id;
             Name = name;
@@ -39,9 +42,9 @@ namespace PrepareData.Data.Types
 
         public int GetNumberOfVacancies()
         {
-            if (ActiveJudges != null)
+            if (ActiveJudges != 0)
             {
-                return (int)(MaxJudges - ActiveJudges);
+                return MaxJudges - ActiveJudges;
             }
             return MaxJudges;
         }
@@ -57,7 +60,7 @@ namespace PrepareData.Data.Types
             CourtOfAppeal = int.Parse(digits);
 
         }
-        public void FindPartisanshipOfCourt(List<Judge> judges)
+        public void SetPartisanshipOfCourt(List<Judge> judges)
         {
             DEMJudges = 0;
             foreach (Judge judge in judges)
@@ -68,6 +71,18 @@ namespace PrepareData.Data.Types
                 }
             }
             GOPJudges = ActiveJudges - DEMJudges;
+        }
+        public int FindPartisanshipOfCourt()
+        {
+            if (DEMJudges > GOPJudges)
+            {
+                return 1;
+            }
+            else if (DEMJudges < GOPJudges)
+            {
+                return -1;
+            }
+            return 0;
         }
 
         public void FindChiefJudge(List<Judge> judges)

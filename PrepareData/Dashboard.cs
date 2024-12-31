@@ -80,7 +80,7 @@ namespace PrepareData
                 {
                     List<Judge> returning = await WikipediaScrapper.GetCJudges(court);
                     court.ActiveJudges = returning.Count;
-                    court.FindPartisanshipOfCourt(returning);
+                    court.SetPartisanshipOfCourt(returning);
                     court.FindChiefJudge(returning);
                     court.FindNumOfSeniorEligibles(returning);
                     judges.AddRange(returning);
@@ -89,7 +89,7 @@ namespace PrepareData
                 {
                     List<Judge> returning = await WikipediaScrapper.GetDJudges(court);
                     court.ActiveJudges = returning.Count;
-                    court.FindPartisanshipOfCourt(returning);
+                    court.SetPartisanshipOfCourt(returning);
                     court.FindNumOfSeniorEligibles(returning);
                     judges.AddRange(returning);
                 }
@@ -207,7 +207,7 @@ namespace PrepareData
                 {
                     List<Judge> returning = await WikipediaScrapper.GetCJudges(curcuit);
                     curcuit.ActiveJudges = returning.Count;
-                    curcuit.FindPartisanshipOfCourt(returning);
+                    curcuit.SetPartisanshipOfCourt(returning);
                     curcuit.FindChiefJudge(returning);
                     curcuit.FindNumOfSeniorEligibles(returning);
                     judges.AddRange(returning);
@@ -217,7 +217,7 @@ namespace PrepareData
                 {
                     List<Judge> returning = await WikipediaScrapper.GetDJudges(district);
                     district.ActiveJudges = returning.Count;
-                    district.FindPartisanshipOfCourt(returning);
+                    district.SetPartisanshipOfCourt(returning);
                     district.FindChiefJudge(returning);
                     district.FindNumOfSeniorEligibles(returning);
                     judges.AddRange(returning);

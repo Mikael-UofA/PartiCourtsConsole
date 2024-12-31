@@ -1,0 +1,546 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20243.24.1010.1014                               -->
+<workbook original-version='18.1' source-build='2024.3.0 (20243.24.1010.1014)' source-platform='win' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <AccessibleZoneTabOrder />
+    <AnimationOnByDefault />
+    <AutoCreateAndUpdateDSDPhoneLayouts />
+    <MapboxVectorStylesAndLayers />
+    <MarkAnimation />
+    <ObjectModelEncapsulateLegacy />
+    <ObjectModelExtractV2 />
+    <ObjectModelTableType />
+    <SchemaViewerObjectModel />
+    <SetMembershipControl />
+    <SheetIdentifierTracking />
+    <SpatialFileLayer />
+    <_.fcp.VConnDownstreamExtractsWithWarnings.true...VConnDownstreamExtractsWithWarnings />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='usable' inline='true' name='federated.0zk7ft314b834r1g02du50sa4u9c' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='usable' name='ogrdirect.1l251di1no7ksy1a09kfv1mguz2s'>
+            <connection class='ogrdirect' directory='C:/Users/admin/Documents/Projects/PartiCourts/SQLDataAccess/PrepareData/sources' filename='usable.geojson' password='' server='' tablename='' />
+          </named-connection>
+        </named-connections>
+        <relation connection='ogrdirect.1l251di1no7ksy1a09kfv1mguz2s' name='usable.geojson' table='[usable.geojson]' type='table'>
+          <columns>
+            <column datatype='integer' name='FID' ordinal='0' />
+            <column datatype='string' name='NAME' ordinal='1' />
+            <column datatype='string' name='CHIEF_JUDGE' ordinal='2' />
+            <column datatype='integer' name='ACTIVE_JUDGES' ordinal='3' />
+            <column datatype='integer' name='SENIOR_ELIGIBLE_JUDGES' ordinal='4' />
+            <column datatype='integer' name='VACANCIES' ordinal='5' />
+            <column datatype='integer' name='PARTISANSHIP' ordinal='6' />
+            <column datatype='spatial' name='Geometry' ordinal='7' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>FID</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[FID]</local-name>
+            <parent-name>[usable.geojson]</parent-name>
+            <remote-alias>FID</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[usable.geojson_532CDAA917C2435DB356CDCF68D5358B]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NAME</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[NAME]</local-name>
+            <parent-name>[usable.geojson]</parent-name>
+            <remote-alias>NAME</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='binary' />
+            <object-id>[usable.geojson_532CDAA917C2435DB356CDCF68D5358B]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>CHIEF_JUDGE</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[CHIEF_JUDGE]</local-name>
+            <parent-name>[usable.geojson]</parent-name>
+            <remote-alias>CHIEF_JUDGE</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='binary' />
+            <object-id>[usable.geojson_532CDAA917C2435DB356CDCF68D5358B]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>ACTIVE_JUDGES</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[ACTIVE_JUDGES]</local-name>
+            <parent-name>[usable.geojson]</parent-name>
+            <remote-alias>ACTIVE_JUDGES</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[usable.geojson_532CDAA917C2435DB356CDCF68D5358B]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>SENIOR_ELIGIBLE_JUDGES</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[SENIOR_ELIGIBLE_JUDGES]</local-name>
+            <parent-name>[usable.geojson]</parent-name>
+            <remote-alias>SENIOR_ELIGIBLE_JUDGES</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[usable.geojson_532CDAA917C2435DB356CDCF68D5358B]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>VACANCIES</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[VACANCIES]</local-name>
+            <parent-name>[usable.geojson]</parent-name>
+            <remote-alias>VACANCIES</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[usable.geojson_532CDAA917C2435DB356CDCF68D5358B]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>PARTISANSHIP</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[PARTISANSHIP]</local-name>
+            <parent-name>[usable.geojson]</parent-name>
+            <remote-alias>PARTISANSHIP</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[usable.geojson_532CDAA917C2435DB356CDCF68D5358B]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Geometry</remote-name>
+            <remote-type>8</remote-type>
+            <local-name>[Geometry]</local-name>
+            <parent-name>[usable.geojson]</parent-name>
+            <remote-alias>Geometry</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>spatial</local-type>
+            <aggregation>Collect</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[usable.geojson_532CDAA917C2435DB356CDCF68D5358B]</object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Active Judges' datatype='integer' name='[ACTIVE_JUDGES]' role='measure' type='quantitative' />
+      <column caption='Chief Judge' datatype='string' name='[CHIEF_JUDGE]' role='dimension' type='nominal' />
+      <column caption='Partisanship2' datatype='string' name='[Calculation_1103663414846697472]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='IF [PARTISANSHIP] = &quot;1&quot; THEN &quot;Democratic Majority&quot;&#13;&#10;ELSEIF [PARTISANSHIP] = &quot;-1&quot; THEN &quot;Republican Majority&quot;&#13;&#10;ELSE &quot;Currently Balanced&quot; END' />
+      </column>
+      <column caption='Name' datatype='string' name='[NAME]' role='dimension' type='nominal' />
+      <column caption='Partisanship' datatype='string' datatype-customized='true' default-role='measure' default-type='quantitative' name='[PARTISANSHIP]' role='dimension' type='nominal' />
+      <column caption='Senior Eligible Judges' datatype='integer' name='[SENIOR_ELIGIBLE_JUDGES]' role='measure' type='quantitative' />
+      <column caption='Vacancies' datatype='integer' name='[VACANCIES]' role='measure' type='quantitative' />
+      <column caption='usable.geojson' datatype='table' name='[__tableau_internal_object_id__].[usable.geojson_532CDAA917C2435DB356CDCF68D5358B]' role='measure' type='quantitative' />
+      <column-instance column='[PARTISANSHIP]' derivation='Attribute' name='[attr:PARTISANSHIP:nk]' pivot='key' type='nominal' />
+      <column-instance column='[Calculation_1103663414846697472]' derivation='None' name='[none:Calculation_1103663414846697472:nk]' pivot='key' type='nominal' />
+      <extract _.fcp.VConnDownstreamExtractsWithWarnings.true...user-specific='false' count='-1' enabled='true' object-id='' units='records'>
+        <connection access_mode='readonly' author-locale='en_US' class='hyper' dbname='C:/Users/admin/AppData/Local/Temp/TableauTemp/#TableauTemp_1vkd1nq0zqomun1aenqln09ei1j1.hyper' default-settings='hyper' schema='Extract' sslmode='' tablename='Extract' update-time='12/31/2024 04:04:29 PM' username='tableau_internal_user'>
+          <relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>FID</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[FID]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>FID</remote-alias>
+              <ordinal>0</ordinal>
+              <family>usable.geojson</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>91</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[usable.geojson_532CDAA917C2435DB356CDCF68D5358B]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>NAME</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[NAME]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>NAME</remote-alias>
+              <ordinal>1</ordinal>
+              <family>usable.geojson</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>91</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='binary' />
+              <object-id>[usable.geojson_532CDAA917C2435DB356CDCF68D5358B]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>CHIEF_JUDGE</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[CHIEF_JUDGE]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>CHIEF_JUDGE</remote-alias>
+              <ordinal>2</ordinal>
+              <family>usable.geojson</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>91</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='binary' />
+              <object-id>[usable.geojson_532CDAA917C2435DB356CDCF68D5358B]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>ACTIVE_JUDGES</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[ACTIVE_JUDGES]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>ACTIVE_JUDGES</remote-alias>
+              <ordinal>3</ordinal>
+              <family>usable.geojson</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>21</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[usable.geojson_532CDAA917C2435DB356CDCF68D5358B]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>SENIOR_ELIGIBLE_JUDGES</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[SENIOR_ELIGIBLE_JUDGES]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>SENIOR_ELIGIBLE_JUDGES</remote-alias>
+              <ordinal>4</ordinal>
+              <family>usable.geojson</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>7</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[usable.geojson_532CDAA917C2435DB356CDCF68D5358B]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>VACANCIES</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[VACANCIES]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>VACANCIES</remote-alias>
+              <ordinal>5</ordinal>
+              <family>usable.geojson</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>5</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[usable.geojson_532CDAA917C2435DB356CDCF68D5358B]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>PARTISANSHIP</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[PARTISANSHIP]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>PARTISANSHIP</remote-alias>
+              <ordinal>6</ordinal>
+              <family>usable.geojson</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>3</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[usable.geojson_532CDAA917C2435DB356CDCF68D5358B]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Geometry</remote-name>
+              <remote-type>128</remote-type>
+              <local-name>[Geometry]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Geometry</remote-alias>
+              <ordinal>7</ordinal>
+              <family>usable.geojson</family>
+              <local-type>spatial</local-type>
+              <aggregation>Collect</aggregation>
+              <approx-count>91</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[usable.geojson_532CDAA917C2435DB356CDCF68D5358B]</object-id>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[attr:PARTISANSHIP:nk]' type='palette'>
+            <map to='#0033cc'>
+              <bucket>&quot;1&quot;</bucket>
+            </map>
+            <map to='#9932cc'>
+              <bucket>&quot;0&quot;</bucket>
+            </map>
+            <map to='#cc0000'>
+              <bucket>&quot;-1&quot;</bucket>
+            </map>
+          </encoding>
+          <encoding attr='color' field='[none:Calculation_1103663414846697472:nk]' type='palette'>
+            <map to='#4e79a7'>
+              <bucket>&quot;Democratic Majority&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;Currently Balanced&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;Republican Majority&quot;</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;Canada&quot;' />
+      </semantic-values>
+      <field-sort-info field-sort-order-type='custom-order'>
+        <field-sort-custom-order field='FID' />
+        <field-sort-custom-order field='NAME' />
+        <field-sort-custom-order field='CHIEF_JUDGE' />
+        <field-sort-custom-order field='ACTIVE_JUDGES' />
+        <field-sort-custom-order field='SENIOR_ELIGIBLE_JUDGES' />
+        <field-sort-custom-order field='VACANCIES' />
+        <field-sort-custom-order field='PARTISANSHIP' />
+        <field-sort-custom-order field='Calculation_1103663414846697472' />
+        <field-sort-custom-order field='Geometry' />
+        <field-sort-custom-order field='Geometry (generated)' />
+        <field-sort-custom-order field='Latitude (generated)' />
+        <field-sort-custom-order field='Longitude (generated)' />
+        <field-sort-custom-order field=':Measure Names' />
+        <field-sort-custom-order field='Multiple Values' />
+      </field-sort-info>
+      <object-graph>
+        <objects>
+          <object caption='usable.geojson' id='usable.geojson_532CDAA917C2435DB356CDCF68D5358B'>
+            <properties context=''>
+              <relation connection='ogrdirect.1l251di1no7ksy1a09kfv1mguz2s' name='usable.geojson' table='[usable.geojson]' type='table'>
+                <columns>
+                  <column datatype='integer' name='FID' ordinal='0' />
+                  <column datatype='string' name='NAME' ordinal='1' />
+                  <column datatype='string' name='CHIEF_JUDGE' ordinal='2' />
+                  <column datatype='integer' name='ACTIVE_JUDGES' ordinal='3' />
+                  <column datatype='integer' name='SENIOR_ELIGIBLE_JUDGES' ordinal='4' />
+                  <column datatype='integer' name='VACANCIES' ordinal='5' />
+                  <column datatype='integer' name='PARTISANSHIP' ordinal='6' />
+                  <column datatype='spatial' name='Geometry' ordinal='7' />
+                </columns>
+              </relation>
+            </properties>
+            <properties context='extract'>
+              <relation name='Extract' table='[Extract].[Extract]' type='table' />
+            </properties>
+          </object>
+        </objects>
+      </object-graph>
+    </datasource>
+  </datasources>
+  <mapsources>
+    <mapsource name='Tableau' />
+  </mapsources>
+  <worksheets>
+    <worksheet name='Sheet 1'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='usable' name='federated.0zk7ft314b834r1g02du50sa4u9c' />
+          </datasources>
+          <mapsources>
+            <mapsource name='Tableau' />
+          </mapsources>
+          <datasource-dependencies datasource='federated.0zk7ft314b834r1g02du50sa4u9c'>
+            <column caption='Active Judges' datatype='integer' name='[ACTIVE_JUDGES]' role='measure' type='quantitative' />
+            <column caption='Chief Judge' datatype='string' name='[CHIEF_JUDGE]' role='dimension' type='nominal' />
+            <column caption='Partisanship2' datatype='string' name='[Calculation_1103663414846697472]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='IF [PARTISANSHIP] = &quot;1&quot; THEN &quot;Democratic Majority&quot;&#13;&#10;ELSEIF [PARTISANSHIP] = &quot;-1&quot; THEN &quot;Republican Majority&quot;&#13;&#10;ELSE &quot;Currently Balanced&quot; END' />
+            </column>
+            <column datatype='spatial' name='[Geometry]' role='measure' type='nominal' />
+            <column caption='Name' datatype='string' name='[NAME]' role='dimension' type='nominal' />
+            <column caption='Partisanship' datatype='string' datatype-customized='true' default-role='measure' default-type='quantitative' name='[PARTISANSHIP]' role='dimension' type='nominal' />
+            <column caption='Senior Eligible Judges' datatype='integer' name='[SENIOR_ELIGIBLE_JUDGES]' role='measure' type='quantitative' />
+            <column caption='Vacancies' datatype='integer' name='[VACANCIES]' role='measure' type='quantitative' />
+            <column-instance column='[CHIEF_JUDGE]' derivation='Attribute' name='[attr:CHIEF_JUDGE:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Geometry]' derivation='Collect' name='[clct:Geometry:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Calculation_1103663414846697472]' derivation='None' name='[none:Calculation_1103663414846697472:nk]' pivot='key' type='nominal' />
+            <column-instance column='[NAME]' derivation='None' name='[none:NAME:nk]' pivot='key' type='nominal' />
+            <column-instance column='[ACTIVE_JUDGES]' derivation='Sum' name='[sum:ACTIVE_JUDGES:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[SENIOR_ELIGIBLE_JUDGES]' derivation='Sum' name='[sum:SENIOR_ELIGIBLE_JUDGES:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[VACANCIES]' derivation='Sum' name='[sum:VACANCIES:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.0zk7ft314b834r1g02du50sa4u9c].[Longitude (generated)]' field-type='quantitative' max='32696491.633809362' min='27222888.790811718' projection='EPSG:3857' range-type='fixed' scope='cols' type='space' />
+            <encoding attr='space' class='0' field='[federated.0zk7ft314b834r1g02du50sa4u9c].[Latitude (generated)]' field-type='quantitative' max='6067844.5860920511' min='2933084.3770174333' projection='EPSG:3857' range-type='fixed' scope='rows' type='space' />
+          </style-rule>
+          <style-rule element='legend-title-text'>
+            <format attr='color' field='[federated.0zk7ft314b834r1g02du50sa4u9c].[none:Calculation_1103663414846697472:nk]' value='Partisanship'>
+              <formatted-text>
+                <run bold='true' fontsize='10'>Partisanship</run>
+              </formatted-text>
+            </format>
+          </style-rule>
+          <style-rule element='map'>
+            <format attr='washout' value='0.0' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Multipolygon' />
+            <encodings>
+              <color column='[federated.0zk7ft314b834r1g02du50sa4u9c].[none:Calculation_1103663414846697472:nk]' />
+              <tooltip column='[federated.0zk7ft314b834r1g02du50sa4u9c].[sum:VACANCIES:qk]' />
+              <tooltip column='[federated.0zk7ft314b834r1g02du50sa4u9c].[sum:SENIOR_ELIGIBLE_JUDGES:qk]' />
+              <tooltip column='[federated.0zk7ft314b834r1g02du50sa4u9c].[sum:ACTIVE_JUDGES:qk]' />
+              <tooltip column='[federated.0zk7ft314b834r1g02du50sa4u9c].[attr:CHIEF_JUDGE:nk]' />
+              <text column='[federated.0zk7ft314b834r1g02du50sa4u9c].[none:NAME:nk]' />
+              <lod column='[federated.0zk7ft314b834r1g02du50sa4u9c].[clct:Geometry:nk]' />
+              <geometry column='[federated.0zk7ft314b834r1g02du50sa4u9c].[clct:Geometry:nk]' />
+            </encodings>
+            <customized-tooltip>
+              <formatted-text>
+                <run fontcolor='#787878'>Name:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0zk7ft314b834r1g02du50sa4u9c].[none:NAME:nk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Chief Judge:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0zk7ft314b834r1g02du50sa4u9c].[attr:CHIEF_JUDGE:nk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Active Judges:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0zk7ft314b834r1g02du50sa4u9c].[sum:ACTIVE_JUDGES:qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Senior Eligible Judges:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0zk7ft314b834r1g02du50sa4u9c].[sum:SENIOR_ELIGIBLE_JUDGES:qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Vacancies:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0zk7ft314b834r1g02du50sa4u9c].[sum:VACANCIES:qk]>]]></run>
+              </formatted-text>
+            </customized-tooltip>
+            <customized-label>
+              <formatted-text />
+            </customized-label>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-transparency' value='180' />
+                <format attr='mark-labels-show' value='false' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0zk7ft314b834r1g02du50sa4u9c].[Latitude (generated)]</rows>
+        <cols>[federated.0zk7ft314b834r1g02du50sa4u9c].[Longitude (generated)]</cols>
+      </table>
+      <simple-id uuid='{17C3FC47-4B4D-4D61-B121-0CD5C9B4DA6F}' />
+    </worksheet>
+  </worksheets>
+  <dashboards>
+    <dashboard enable-sort-zone-taborder='true' name='Dashboard 1'>
+      <style />
+      <size maxheight='860' maxwidth='650' minheight='560' minwidth='420' />
+      <zones>
+        <zone h='100000' id='4' type-v2='layout-basic' w='100000' x='0' y='0'>
+          <zone h='98004' id='7' param='horz' type-v2='layout-flow' w='97538' x='1231' y='998'>
+            <zone h='98004' id='5' type-v2='layout-basic' w='72000' x='1231' y='998'>
+              <zone h='98004' id='3' name='Sheet 1' w='72000' x='1231' y='998'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+            </zone>
+            <zone fixed-size='166' h='98004' id='6' is-fixed='true' param='vert' type-v2='layout-flow' w='25538' x='73231' y='998'>
+              <zone h='11846' id='8' name='Sheet 1' pane-specification-id='0' param='[federated.0zk7ft314b834r1g02du50sa4u9c].[none:Calculation_1103663414846697472:nk]' type-v2='color' w='25538' x='73231' y='998'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+            </zone>
+          </zone>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='none' />
+            <format attr='border-width' value='0' />
+            <format attr='margin' value='8' />
+          </zone-style>
+        </zone>
+      </zones>
+      <devicelayouts>
+        <devicelayout auto-generated='true' name='Phone'>
+          <size maxheight='700' minheight='700' sizing-mode='vscroll' />
+          <zones>
+            <zone h='100000' id='2' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='84000' id='1' param='vert' type-v2='layout-flow' w='84000' x='8000' y='8000' />
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='margin' value='8' />
+              </zone-style>
+            </zone>
+          </zones>
+        </devicelayout>
+      </devicelayouts>
+      <simple-id uuid='{BE6A9530-4107-4E80-8ADA-FB0BFAD2C059}' />
+    </dashboard>
+  </dashboards>
+  <windows saved-dpi-scale-factor='1.25' source-height='37'>
+    <window class='worksheet' name='Sheet 1'>
+      <cards>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.0zk7ft314b834r1g02du50sa4u9c].[none:Calculation_1103663414846697472:nk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <floating-toolbar-visibility value='2' />
+        <geo-search-visibility value='1' />
+        <default-map-tool-selection tool='2' />
+        <default-map-unit-selection mapunit='2' />
+      </viewpoint>
+      <simple-id uuid='{A32FDE94-638D-458B-9519-B4718813F7BC}' />
+    </window>
+    <window class='dashboard' maximized='true' name='Dashboard 1'>
+      <viewpoints>
+        <viewpoint name='Sheet 1'>
+          <zoom type='entire-view' />
+          <floating-toolbar-visibility value='2' />
+          <geo-search-visibility value='1' />
+          <default-map-unit-selection mapunit='2' />
+        </viewpoint>
+      </viewpoints>
+      <active id='8' />
+      <simple-id uuid='{895D1567-2B15-455B-85DF-0CFEBD4AC402}' />
+    </window>
+  </windows>
+</workbook>
