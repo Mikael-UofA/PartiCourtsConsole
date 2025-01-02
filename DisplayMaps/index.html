@@ -12,39 +12,32 @@
           <div class="logo"><a href="#">PartiCourts</a></div>
           <input type="radio" name="slider" id="menu-btn">
           <input type="radio" name="slider" id="close-btn">
-          <ul class="nav-links">
+          <ol class="nav-links">
             <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
-            <li><a href="#">Home</a></li>
             <li><a href="#">About</a></li>
             <li>
-              <a href="#" class="desktop-item">District Courts</a>
-              <input type="checkbox" id="showDrop">
-              <label for="showDrop" class="mobile-item">District Courts</label>
-              <ul class="drop-menu">
-                <li><a href="#">District Courts</a></li>
-                <li><a href="#">Circuit Courts</a></li>
-              </ul>
+                <a href="#" class="court-display">District Courts</a>
+                <input type="checkbox" id="showDrop">
+                <ol class="drop-menu court-type">
+                    <li><a href="#" class="selected unclickable">District Courts</a></li>
+                    <li><a href="#">Circuit Courts</a></li>
+                </ol>
             </li>
             <li>
-                <a href="#" class="desktop-item">Partisanship</a>
+                <a href="#" class="mode-display">Partisanship</a>
                 <input type="checkbox" id="showDrop">
-                <label for="showDrop" class="mobile-item">Partisanship</label>
-                <ul class="drop-menu">
-                  <li><a href="#">Partisanship</a></li>
-                  <li><a href="#">Vacancies</a></li>
-                  <li><a href="#">Retirements</a></li>
-                  <li><a href="#">No Vacancies</a></li>
-                </ul>
-              </li>
+                <ol class="drop-menu mode-type">
+                    <li><a href="#" class="selected unclickable">Partisanship</a></li>
+                    <li><a href="#">Vacancies</a></li>
+                    <li><a href="#">Retirements</a></li>
+                    <li><a href="#">No Vacancies</a></li>
+                </ol>
+            </li>
             <li><a href="https://github.com/Mikael-UofA/PartiCourtsConsole" target="_blank">Contribute</a></li>
-          </ul>
+          </ol>
           <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
         </div>
       </nav>
-      
-      <div class="body-text">
-        <div class="title">Responsive Dropdown and Mega Menu</div>
-        <div class="sub-title">using only HTML & CSS</div>
-      </div>
+      <script src="./script.js"></script>
 </body>
 </html>
