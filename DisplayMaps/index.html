@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"
     <title>PartiCourts</title>
 </head>
 <body>
@@ -36,7 +37,6 @@
           <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
         </div>
     </nav>
-
     <div class="window hidden" tabindex="0">
         <div class="window__title-bar">
             <div class="window__title">
@@ -46,7 +46,6 @@
                 &times;
             </button>
         </div>
-
         <div class="window__body">
             <h1>About PartiCourts ✨</h1>
             <p>
@@ -84,6 +83,14 @@
             </p>
         </div>
     </div>
-      <script src="./script.js"></script>
+    <div id="map"></div>
+    <div class="map-legend">
+        <p><strong>Legend</strong></p>
+        <p style="color: blue;">Majority Democratic</p>
+        <p style="color: red;">Majority Republican</p>
+        <p style="color: purple;">Currently Balanced</p>
+    </div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="./script.js"></script>
 </body>
 </html>

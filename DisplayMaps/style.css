@@ -7,6 +7,7 @@ body {
   align-items: center;
   min-height: 100vh;
   margin: 0;
+  position: relative;
 }
 * {
   margin: 0;
@@ -18,7 +19,7 @@ nav {
   position: fixed;
   z-index: 99;
   width: 100%;
-
+  z-index: 100;
   background: #464053;
 }
 nav .navbar {
@@ -40,6 +41,7 @@ nav .navbar {
 }
 .navbar .nav-links {
   display: inline-flex;
+  z-index: 101;
 }
 .nav-links li {
   list-style: none;
@@ -121,6 +123,7 @@ nav input {
   flex-direction: column;
   min-width: 400px;
   min-height: 300px;
+  z-index: 102;
   border: 5px solid #5e2ae9;
   box-shadow: 15px 15px 0 #5e2ae9;
   max-width: 600px;
@@ -243,4 +246,20 @@ pre {
 }
 p + h2 {
   margin-top: 20px;
+}
+
+#map {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: calc(100vh - 70px);
+  width: 100%;
+  z-index: 1;
+}
+.map-legend {
+  position: fixed;
+  bottom: 50px;
+  left: 50px;
+  z-index: 2;
+  font-size: 14px;
 }
