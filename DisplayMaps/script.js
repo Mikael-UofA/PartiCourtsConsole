@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentModeType = document.querySelector('.mode-display');
     const courtTypes = document.querySelectorAll('.court-type a');
     const modeTypes = document.querySelectorAll('.mode-type a');
-    const checkbox = document.querySelector('#showDrop');
 
     courtTypes.forEach(courtType => {
         courtType.addEventListener('click', function(event) {
@@ -23,8 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             courtType.classList.add('selected');
             courtType.classList.add('unclickable');
-
-            checkbox.checked = false;
         })
 
     })
@@ -46,8 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             modeType.classList.add('selected');
             modeType.classList.add('unclickable');
-            
-            checkbox.checked = false;
         })
     })
 });

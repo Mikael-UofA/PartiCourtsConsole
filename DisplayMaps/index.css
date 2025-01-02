@@ -142,9 +142,6 @@ nav .wrapper{
     transition: all 0.3s ease;
   }
   
-  #showDrop:checked + .drop-menu {
-    display: block;
-  }
   .nav-links .desktop-item{
     display: none;
   }
