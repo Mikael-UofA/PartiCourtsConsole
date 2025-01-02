@@ -8,13 +8,13 @@
 </head>
 <body>
     <nav>
-        <div class="wrapper">
+        <div class="navbar">
           <div class="logo"><a href="#">PartiCourts</a></div>
           <input type="radio" name="slider" id="menu-btn">
           <input type="radio" name="slider" id="close-btn">
           <ol class="nav-links">
             <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
-            <li><a href="#">About</a></li>
+            <li><a href="#" class="about-popup">About</a></li>
             <li>
                 <a href="#" class="court-display">District Courts</a>
                 <ol class="drop-menu court-type">
@@ -35,7 +35,55 @@
           </ol>
           <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
         </div>
-      </nav>
+    </nav>
+
+    <div class="window hidden" tabindex="0">
+        <div class="window__title-bar">
+            <div class="window__title">
+            About
+            </div>
+            <button class="window__btn">
+                &times;
+            </button>
+        </div>
+
+        <div class="window__body">
+            <h1>About PartiCourts ✨</h1>
+            <p>
+                This project is all about creating a map that shows the political leanings of U.S. circuit and district courts. It's designed to help you explore how each court leans, track current judicial vacancies, and see which judges might be retiring soon. My goal is to present all this info in a way that's easy to understand and fun to explore.
+            </p>
+            <h2>Motivation</h2>
+            <p>
+                I'm really into map-making and politics, so this project is a way for me to combine those two interests. The idea came from wanting to make a tool that gives people a better understanding of how the courts are shaping the political landscape in the U.S.
+            </p>
+            <h2>Get Started</h2>
+            <p>
+                On the top right you will see two dropdowns:
+                <p>The first one will allow you to choose the court type:</p> 
+                <pre><code>
+                a. District Courts.
+                b. Circuit Courts. 
+                </code></pre>
+                The second one will allow you to choose the map type: 
+                <pre><code>
+                1. Partisanship: Makeup of courts
+                2. Vacancies: Courts with seat(s) that are currently vacant
+                3. Retirements: Courts with judges retiring soon
+                4. No Vacancies: Makeup of courts if vacancies were filled
+                </code></pre>
+            </p>
+            <h2>Future Plans</h2>
+            <p>
+                Currently I have only coded the collection and mapping of the partisanship for the district courts. I plan on finishing up the mapping of vacancies soon and then I'll tackle the future vacancies map some time in the future.
+                I plan on automating the process of updating the maps (the goal is to do it automatically each month) at after all of that. 
+                Ideally this should all be done by late April 2024 but that is to be seen.
+            </p>
+            <h2>Want to Help?</h2>
+            <p>
+                If you have any ideas, feedback, or want to contribute to the project in any way (especially if it is related to the ui), I'm totally open to it. Simply click on "Contribute" on the top right to access the github repo.
+            </p>
+        </div>
+    </div>
       <script src="./script.js"></script>
 </body>
 </html>

@@ -1,11 +1,21 @@
 'use strict'
 
 document.addEventListener('DOMContentLoaded', () => {
+    const aboutLink = document.querySelector('.about-popup')
     const currentCourtType = document.querySelector('.court-display');
     const currentModeType = document.querySelector('.mode-display');
     const courtTypes = document.querySelectorAll('.court-type a');
     const modeTypes = document.querySelectorAll('.mode-type a');
+    const modalPopup = document.querySelector('.window');
+    const modalCloseBtn = document.querySelector('.window__btn');
 
+
+    aboutLink.addEventListener('click', () => {
+        modalPopup.classList.remove('hidden');
+    })
+    modalCloseBtn.addEventListener('click', () => {
+        modalPopup.classList.add('hidden');
+    })
     courtTypes.forEach(courtType => {
         courtType.addEventListener('click', function(event) {
             // If link is already selected, prevent further clicks
