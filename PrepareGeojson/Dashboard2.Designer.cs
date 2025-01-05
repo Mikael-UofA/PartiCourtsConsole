@@ -33,7 +33,9 @@
             StatusBox = new RichTextBox();
             InputGeoButton = new Button();
             OutputGeoButton = new Button();
-            CrtGeoButton = new Button();
+            CrtGeoDCButton = new Button();
+            CCourtsButton = new Button();
+            CrtGeoCCButton = new Button();
             SuspendLayout();
             // 
             // DCourtsButton
@@ -97,25 +99,53 @@
             OutputGeoButton.UseVisualStyleBackColor = false;
             OutputGeoButton.Click += OutputGeoButton_Click;
             // 
-            // CrtGeoButton
+            // CrtGeoDCButton
             // 
-            CrtGeoButton.BackColor = Color.MediumTurquoise;
-            CrtGeoButton.Font = new Font("Arial", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            CrtGeoButton.ForeColor = SystemColors.InfoText;
-            CrtGeoButton.Location = new Point(173, 12);
-            CrtGeoButton.Name = "CrtGeoButton";
-            CrtGeoButton.Size = new Size(139, 56);
-            CrtGeoButton.TabIndex = 12;
-            CrtGeoButton.Text = "Create File";
-            CrtGeoButton.UseVisualStyleBackColor = false;
-            CrtGeoButton.Click += CrtGeoButton_Click;
+            CrtGeoDCButton.BackColor = Color.MediumTurquoise;
+            CrtGeoDCButton.Font = new Font("Arial", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            CrtGeoDCButton.ForeColor = SystemColors.InfoText;
+            CrtGeoDCButton.Location = new Point(173, 12);
+            CrtGeoDCButton.Name = "CrtGeoDCButton";
+            CrtGeoDCButton.Size = new Size(139, 56);
+            CrtGeoDCButton.TabIndex = 12;
+            CrtGeoDCButton.Text = "Create DC File";
+            CrtGeoDCButton.UseVisualStyleBackColor = false;
+            CrtGeoDCButton.Click += CrtGeoButton_Click;
+            // 
+            // CCourtsButton
+            // 
+            CCourtsButton.BackColor = Color.MediumTurquoise;
+            CCourtsButton.Font = new Font("Arial", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            CCourtsButton.ForeColor = SystemColors.InfoText;
+            CCourtsButton.Location = new Point(12, 83);
+            CCourtsButton.Name = "CCourtsButton";
+            CCourtsButton.Size = new Size(139, 56);
+            CCourtsButton.TabIndex = 13;
+            CCourtsButton.Text = "Query CCs";
+            CCourtsButton.UseVisualStyleBackColor = false;
+            CCourtsButton.Click += CCourtsButton_Click;
+            // 
+            // CrtGeoCCButton
+            // 
+            CrtGeoCCButton.BackColor = Color.MediumTurquoise;
+            CrtGeoCCButton.Font = new Font("Arial", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            CrtGeoCCButton.ForeColor = SystemColors.InfoText;
+            CrtGeoCCButton.Location = new Point(173, 83);
+            CrtGeoCCButton.Name = "CrtGeoCCButton";
+            CrtGeoCCButton.Size = new Size(139, 56);
+            CrtGeoCCButton.TabIndex = 14;
+            CrtGeoCCButton.Text = "Create CC File";
+            CrtGeoCCButton.UseVisualStyleBackColor = false;
+            CrtGeoCCButton.Click += CrtGeoCCButton_Click;
             // 
             // Dashboard2
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(CrtGeoButton);
+            Controls.Add(CrtGeoCCButton);
+            Controls.Add(CCourtsButton);
+            Controls.Add(CrtGeoDCButton);
             Controls.Add(OutputGeoButton);
             Controls.Add(InputGeoButton);
             Controls.Add(StatusBox);
@@ -133,6 +163,8 @@
         private RichTextBox StatusBox;
         private Button InputGeoButton;
         private Button OutputGeoButton;
-        private Button CrtGeoButton;
+        private Button CrtGeoDCButton;
+        private Button CCourtsButton;
+        private Button CrtGeoCCButton;
     }
 }

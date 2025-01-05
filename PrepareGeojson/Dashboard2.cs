@@ -6,6 +6,7 @@ namespace PrepareGeojson
     public partial class Dashboard2 : Form
     {
         private List<DistrictCourt> dcourts = new List<DistrictCourt>();
+        private List<CircuitCourt> ccourts = new List<CircuitCourt>();
         private DataAccess dataAccess2 = new DataAccess();
 
         public Dashboard2()
@@ -32,24 +33,6 @@ namespace PrepareGeojson
             StatusBox.Text = text + code;
         }
 
-        private void DCourtsButton_Click(object sender, EventArgs e)
-        {
-            ChangeStatus(0);
-            try
-            {
-                dcourts = dataAccess2.GetDistrictCourts();
-                ChangeStatus(1);
-
-                DCourtsButton.Enabled = false;
-                DCourtsButton.BackColor = Color.Chartreuse;
-                DCourtsButton.Cursor = Cursors.No;
-            }
-            catch (Exception ex)
-            {
-                ChangeStatus(-1);
-                MessageBox.Show(ex.Message);
-            }
-        }
 
         private void TestConnButton_Click(object sender, EventArgs e)
         {
@@ -68,7 +51,7 @@ namespace PrepareGeojson
 
         private void InputGeoButton_Click(object sender, EventArgs e)
         {
-            if (File.Exists(GeojsonConfig.geoInputPath))
+            if (File.Exists(GeojsonConfig.geoDCInputPath))
             {
                 MessageBox.Show($"Path is valid");
                 ChangeStatus(1);
@@ -82,7 +65,7 @@ namespace PrepareGeojson
 
         private void OutputGeoButton_Click(object sender, EventArgs e)
         {
-            if (File.Exists(GeojsonConfig.geoOutputPath))
+            if (File.Exists(GeojsonConfig.geoDCOutputPath))
             {
                 MessageBox.Show($"Path is valid");
                 ChangeStatus(1);
@@ -94,6 +77,44 @@ namespace PrepareGeojson
             }
         }
 
+        private void DCourtsButton_Click(object sender, EventArgs e)
+        {
+            ChangeStatus(0);
+            try
+            {
+                dcourts = dataAccess2.GetDistrictCourts();
+                ChangeStatus(1);
+
+                DCourtsButton.Enabled = false;
+                DCourtsButton.BackColor = Color.Chartreuse;
+                DCourtsButton.Cursor = Cursors.No;
+            }
+            catch (Exception ex)
+            {
+                ChangeStatus(-1);
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void CCourtsButton_Click(object sender, EventArgs e)
+        {
+            ChangeStatus(0);
+            try
+            {
+                ccourts = dataAccess2.GetCurcuitCourts();
+                ChangeStatus(1);
+
+                CCourtsButton.Enabled = false;
+                CCourtsButton.BackColor = Color.Chartreuse;
+                CCourtsButton.Cursor = Cursors.No;
+            }
+            catch (Exception ex)
+            {
+                ChangeStatus(-1);
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
         private void CrtGeoButton_Click(object sender, EventArgs e)
         {
             try
@@ -101,9 +122,27 @@ namespace PrepareGeojson
                 GeojsonConfig.CreateUsableGeojson(dcourts);
                 ChangeStatus(1);
 
-                DCourtsButton.Enabled = false;
-                DCourtsButton.BackColor = Color.Chartreuse;
-                DCourtsButton.Cursor = Cursors.No;
+                CrtGeoDCButton.Enabled = false;
+                CrtGeoDCButton.BackColor = Color.Chartreuse;
+                CrtGeoDCButton.Cursor = Cursors.No;
+            }
+            catch (Exception ex)
+            {
+                ChangeStatus(-1);
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void CrtGeoCCButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                GeojsonConfig.CreateUsableGeojson(ccourts);
+                ChangeStatus(1);
+
+                CrtGeoCCButton.Enabled = false;
+                CrtGeoCCButton.BackColor = Color.Chartreuse;
+                CrtGeoCCButton.Cursor = Cursors.No;
             }
             catch (Exception ex)
             {

@@ -8,7 +8,8 @@ namespace PrepareData
         private List<CircuitCourt> ccourts = new List<CircuitCourt>();
         private List<DistrictCourt> dcourts = new List<DistrictCourt>();
         private List<Judge> judges = new List<Judge>();
-        private string geojsonPath = "../../../sources/boundaries.geojson";
+        private string geojsonDCPath = "../../../sources/dc_boundaries.geojson";
+        private string geojsonCCPath = "../../../sources/cc_boundaries.geojson";
         private DataAccess dataAccess1 = new DataAccess();
 
         public Dashboard()
@@ -59,7 +60,7 @@ namespace PrepareData
                 List<int> remove = new List<int> { 74, 61, 86 };
                 foreach (DistrictCourt dcourt in dcourts)
                 {
-                    dcourt.SetIdFromGeoJson(geojsonPath);
+                    dcourt.SetIdFromGeoJson(geojsonDCPath);
                 }
                 DisableEnableButton(DCourtsButton, JudgesButton);
                 ChangeStatus(1);

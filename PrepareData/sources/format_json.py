@@ -1,7 +1,7 @@
 import json
 
 
-with open('boundaries.json', 'r') as file:
+with open('dc_boundaries.json', 'r') as file:
     geojson_data = json.load(file)
 def format_coordinates(geometry):
     if 'coordinates' in geometry:
@@ -19,7 +19,7 @@ for feature in geojson_data['features']:
 
     # Format coordinates
     format_coordinates(feature['geometry'])
-with open('boundaries.geojson', 'w') as outfile:
+with open('dc_boundaries.geojson', 'w') as outfile:
     json.dump(geojson_data, outfile, indent=2, separators=(',', ': '))
 
-print("GeoJSON file has been modified and saved as 'boundaries.geojson'.")
+print("GeoJSON file has been modified and saved as 'dc_boundaries.geojson'.")

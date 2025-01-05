@@ -13,6 +13,7 @@ namespace PrepareData.Data.Types
         public int DEMJudges { get; set; }
         public int GOPJudges { get; set; }
 
+        public CircuitCourt() { }
         public CircuitCourt(int id, string name, string supervisingJustice, int maxJudges)
         {
             Id = id;
@@ -56,6 +57,19 @@ namespace PrepareData.Data.Types
                 }
             }
             GOPJudges = ActiveJudges - DEMJudges;
+        }
+
+        public int FindPartisanshipOfCourt()
+        {
+            if (DEMJudges > GOPJudges)
+            {
+                return 1;
+            }
+            else if (DEMJudges < GOPJudges)
+            {
+                return -1;
+            }
+            return 0;
         }
 
         public void FindChiefJudge(List<Judge> judges)
