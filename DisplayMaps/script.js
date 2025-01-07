@@ -32,6 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const modeTypes = document.querySelectorAll('.mode-type a');
     const modalPopup = document.querySelector('.window');
     const modalCloseBtn = document.querySelector('.window__btn');
+    const legend1 = document.getElementById('legend1');
+    const legend2 = document.getElementById('legend2');
+
 
 
     aboutLink.addEventListener('click', () => {
@@ -47,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 event.preventDefault();
                 return;
             }
-            // Prevent navigation
+  
             event.preventDefault();
             currentCourtType.textContent = courtType.textContent;
             courtTypes.forEach(item => {
@@ -74,9 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 event.preventDefault();
                 return;
             }
-            // Prevent navigation
-            event.preventDefault();
 
+            event.preventDefault();
             currentModeType.textContent = modeType.textContent;
             modeTypes.forEach(item => {
                 item.classList.remove('selected');
@@ -85,15 +87,19 @@ document.addEventListener('DOMContentLoaded', () => {
             modeType.classList.add('selected');
             modeType.classList.add('unclickable');
 
+            currentMode = modeType.textContent.toUpperCase();
             if (modeType.textContent === "Partisanship") {
-                currentMode = modeType.textContent.toUpperCase();
                 currentColorMapping = colorMapping;
+                legend1.classList.remove('hidden');
+                legend2.classList.add('hidden');
             } else if (modeType.textContent === "Vacancies") {
-                currentMode = modeType.textContent.toUpperCase();
                 currentColorMapping = colorMapping2;
+                legend1.classList.add('hidden');
+                legend2.classList.remove('hidden');
             } else if (modeType.textContent === "No Vacancies") {
-                currentMode = modeType.textContent.toUpperCase();
                 currentColorMapping = colorMapping;
+                legend1.classList.remove('hidden');
+                legend2.classList.add('hidden');
             }
             clearMap();
             loadGeoJSON();

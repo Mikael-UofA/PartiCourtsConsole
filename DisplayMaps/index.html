@@ -81,11 +81,17 @@
         </div>
     </div>
     <div id="map"></div>
-    <div class="map-legend">
+    <div class="map-legend" id="legend1">
         <p><strong>Legend</strong></p>
         <p style="color: blue;">Majority Democratic</p>
         <p style="color: red;">Majority Republican</p>
         <p style="color: purple;">Currently Balanced</p>
+    </div>
+    <div class="map-legend hidden" id="legend2">
+        <p><strong>Legend</strong></p>
+        <p style="color: #818089;">One Vacancy</p>
+        <p style="color: #F53778;">Two Vacancies</p>
+        <p style="color: #9C0B0A;">Three+ Vacancies</p>
     </div>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="./script.js"></script>
