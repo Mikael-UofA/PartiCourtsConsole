@@ -110,7 +110,7 @@
             CrtGeoDCButton.TabIndex = 12;
             CrtGeoDCButton.Text = "Create DC File";
             CrtGeoDCButton.UseVisualStyleBackColor = false;
-            CrtGeoDCButton.Click += CrtGeoButton_Click;
+            CrtGeoDCButton.Click += CrtGeoDCButton_Click;
             // 
             // CCourtsButton
             // 

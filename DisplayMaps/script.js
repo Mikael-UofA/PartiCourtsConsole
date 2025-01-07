@@ -2,7 +2,8 @@
 
 // Initialize map and set its view
 var map = L.map('map').setView([39.8283, -98.5795], 5);
-const geojsonPath = '../PrepareData/sources/usable.geojson';
+const geojsonDCPath = '../PrepareData/sources/dc_usable.geojson';
+const geojsonCCPath = '../PrepareData/sources/cc_usable.geojson';
 const colorMapping = {
     '1': 'blue',
     '-1': 'red', 
@@ -13,8 +14,9 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { // Add tile 
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
+
 document.addEventListener('DOMContentLoaded', () => {
-    loadGeoJSON();
+    loadDCGeoJSON();
     const aboutLink = document.querySelector('.about-popup')
     const currentCourtType = document.querySelector('.court-display');
     const currentModeType = document.querySelector('.mode-display');
@@ -47,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
             courtType.classList.add('selected');
             courtType.classList.add('unclickable');
         })
-
     })
 
     modeTypes.forEach(modeType => {
@@ -76,7 +77,7 @@ function getColor(partisanship) {
     return partisanship === 1 ? 'blue' : partisanship === -1 ? 'red' : 'purple';
 }
 // Function to create a popup for each feature
-function onEachFeature(feature, layer) {
+function onEachDCFeature(feature, layer) {
     var content = `<h3>${feature.properties.NAME}</h3>
                    <p>FID: ${feature.properties.FID}</p>
                    <p>CHIEF JUDGE: ${feature.properties.CHIEF_JUDGE}</p>
@@ -85,8 +86,17 @@ function onEachFeature(feature, layer) {
     layer.bindPopup(content);
 }
 
-function loadGeoJSON() {
-    fetch('../PrepareData/sources/usable.geojson')
+function onEachCCFeature(feature, layer) {
+    var content = `<h3>${feature.properties.NAME}</h3>
+                   <p>SUPERVISING JUSTICE: ${feature.properties.SUPERVISING_JUSTICE}</p>
+                   <p>CHIEF JUDGE: ${feature.properties.CHIEF_JUDGE}</p>
+                   <p>ACTIVE JUDGES: ${feature.properties.ACTIVE_JUDGES}</p>
+                   <p>SENIOR ELIGIBLE JUDGES: ${feature.properties.SENIOR_ELIGIBLE_JUDGES}</p>`;
+    layer.bindPopup(content);
+}
+
+function loadDCGeoJSON() {
+    fetch(geojsonDCPath)
         .then(response => response.json())
         .then(data => {
             L.geoJSON(data, {
@@ -99,7 +109,29 @@ function loadGeoJSON() {
                         fillOpacity: 0.5
                     };
                 },
-                onEachFeature: onEachFeature
+                onEachFeature: onEachDCFeature
+            }).addTo(map);
+        })
+        .catch(error => {
+            console.error("Error loading GeoJSON data:", error);
+        });
+}
+
+function loadCCGeoJSON() {
+    fetch(geojsonCCPath)
+        .then(response => response.json())
+        .then(data => {
+            return L.geoJSON(data, {
+                style: function (feature) {
+                    return {
+                        fillColor: colorMapping[feature.properties.PARTISANSHIP] || '#FFFFFF',
+                        weight: 2,
+                        color: '#000000',
+                        opacity: 1,                   
+                        fillOpacity: 0.5
+                    };
+                },
+                onEachFeature: onEachCCFeature
             }).addTo(map);
         })
         .catch(error => {

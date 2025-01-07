@@ -115,11 +115,11 @@ namespace PrepareGeojson
         }
 
 
-        private void CrtGeoButton_Click(object sender, EventArgs e)
+        private void CrtGeoDCButton_Click(object sender, EventArgs e)
         {
             try
             {
-                GeojsonConfig.CreateUsableGeojson(dcourts);
+                GeojsonConfig.CreateUsableGeojsonDC(dcourts);
                 ChangeStatus(1);
 
                 CrtGeoDCButton.Enabled = false;
@@ -137,7 +137,7 @@ namespace PrepareGeojson
         {
             try
             {
-                GeojsonConfig.CreateUsableGeojson(ccourts);
+                GeojsonConfig.CreateUsableGeojsonCC(ccourts);
                 ChangeStatus(1);
 
                 CrtGeoCCButton.Enabled = false;

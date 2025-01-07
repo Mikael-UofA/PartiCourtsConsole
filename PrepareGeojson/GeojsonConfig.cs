@@ -11,7 +11,7 @@ namespace PrepareGeojson
 
        public static string geoCCInputPath = "../../../../PrepareData/sources/cc_boundaries.geojson";
        public static string geoCCOutputPath = "../../../../PrepareData/sources/cc_usable.geojson";
-        public static void CreateUsableGeojson(List<DistrictCourt> courts)
+        public static void CreateUsableGeojsonDC(List<DistrictCourt> courts)
        {
             string geo1Content = File.ReadAllText(geoDCInputPath);
             var geo1 = JsonConvert.DeserializeObject<GeoJson>(geo1Content);
@@ -42,7 +42,7 @@ namespace PrepareGeojson
             }
         }
 
-        public static void CreateUsableGeojson(List<CircuitCourt> courts)
+        public static void CreateUsableGeojsonCC(List<CircuitCourt> courts)
         {
             string geo1Content = File.ReadAllText(geoCCInputPath);
             var geo1 = JsonConvert.DeserializeObject<GeoJson>(geo1Content);
@@ -53,7 +53,7 @@ namespace PrepareGeojson
                 foreach (Feature feature in geo1.Features)
                 {
                     string name = (string)feature.Properties["NAME"];
-                    CircuitCourt? currentCourt = courts.Find(court => string.Compare(court.GetCircuitCourtName(), name, StringComparison.OrdinalIgnoreCase) != 0);
+                    CircuitCourt? currentCourt = courts.Find(court => string.Compare(court.GetCircuitCourtName(), name, StringComparison.OrdinalIgnoreCase) == 0);
                     if (currentCourt != null)
                     {
                         Dictionary<string, object> newProperties = new Dictionary<string, object>();
