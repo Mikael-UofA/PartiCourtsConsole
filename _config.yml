@@ -1,0 +1,25 @@
+# Site settings
+title: "PartiCourts"
+description: "Explore and analyze court data with PartiCourts"
+author: "Mikael"
+baseurl: "/DisplayMaps"
+url: "https://Mikael-UofA.github.io"
+
+# Jekyll build settings
+include:
+  - DisplayMaps
+
+exclude:
+  - .github
+  - node_modules
+  - Gemfile
+  - Gemfile.lock
+
+# Markdown and content
+markdown: kramdown
+kramdown:
+  input: GFM
+
+# Plugins
+plugins:
+  - jekyll-seo-tag
