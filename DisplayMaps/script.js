@@ -1,8 +1,8 @@
 'use strict'
 
 var map = L.map('map').setView([39.8283, -98.5795], 5);
-const geojsonDCPath = '../PrepareData/sources/dc_usable.geojson';
-const geojsonCCPath = '../PrepareData/sources/cc_usable.geojson';
+const geojsonDCPath = 'sources/dc_usable.geojson';
+const geojsonCCPath = 'sources/cc_usable.geojson';
 const currentPresident = -1;
 const colorMapping = {
     '1': 'blue',

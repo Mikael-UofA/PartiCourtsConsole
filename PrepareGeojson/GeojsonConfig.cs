@@ -7,10 +7,10 @@ namespace PrepareGeojson
     public static class GeojsonConfig
     {
        public static string geoDCInputPath = "../../../../PrepareData/sources/dc_boundaries.geojson";
-       public static string geoDCOutputPath = "../../../../PrepareData/sources/dc_usable.geojson";
+       public static string geoDCOutputPath = "../../../../DisplayMaps/sources/dc_usable.geojson";
 
        public static string geoCCInputPath = "../../../../PrepareData/sources/cc_boundaries.geojson";
-       public static string geoCCOutputPath = "../../../../PrepareData/sources/cc_usable.geojson";
+       public static string geoCCOutputPath = "../../../../DisplayMaps/sources/cc_usable.geojson";
         public static void CreateUsableGeojsonDC(List<DistrictCourt> courts)
        {
             string geo1Content = File.ReadAllText(geoDCInputPath);
