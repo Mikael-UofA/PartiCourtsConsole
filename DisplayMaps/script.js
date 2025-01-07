@@ -3,6 +3,7 @@
 var map = L.map('map').setView([39.8283, -98.5795], 5);
 const geojsonDCPath = '../PrepareData/sources/dc_usable.geojson';
 const geojsonCCPath = '../PrepareData/sources/cc_usable.geojson';
+const currentPresident = -1;
 const colorMapping = {
     '1': 'blue',
     '-1': 'red', 
@@ -90,6 +91,9 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (modeType.textContent === "Vacancies") {
                 currentMode = modeType.textContent.toUpperCase();
                 currentColorMapping = colorMapping2;
+            } else if (modeType.textContent === "No Vacancies") {
+                currentMode = modeType.textContent.toUpperCase();
+                currentColorMapping = colorMapping;
             }
             clearMap();
             loadGeoJSON();
@@ -105,6 +109,23 @@ function clearMap() {
     });
 }
 
+function getColoringProperty(feature) {
+    if (currentMode !== "NO VACANCIES") {
+        return feature.properties[currentMode]
+    }
+    return getPartisanshipIfFilled(feature);
+}
+function getPartisanshipIfFilled(feature) {
+    let partisanship = feature.properties.DEMJUDGES - feature.properties.GOPJUDGES;
+    partisanship += feature.properties.VACANCIES * currentPresident;
+
+    if (partisanship > 0) {
+        return 1
+    } else if (partisanship < 0) {
+        return -1
+    }
+    return 0;
+}
 // Function to create a popup for each feature
 function onEachFeature(feature, layer) {
     var content = '';
@@ -133,7 +154,7 @@ function loadGeoJSON() {
             L.geoJSON(data, {
                 style: function (feature) {
                     return {
-                        fillColor: currentColorMapping[feature.properties[currentMode]] || '#9C0B0A',
+                        fillColor: currentColorMapping[getColoringProperty(feature)] || '#9C0B0A',
                         weight: 2,
                         color: '#000000',
                         opacity: 1,                   

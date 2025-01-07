@@ -31,6 +31,8 @@ namespace PrepareGeojson
                         newProperties.Add("ACTIVE_JUDGES", currentCourt.ActiveJudges);
                         newProperties.Add("SENIOR_ELIGIBLE_JUDGES", currentCourt.SeniorEligibleJudges);
                         newProperties.Add("VACANCIES", currentCourt.GetNumberOfVacancies());
+                        newProperties.Add("DEMJUDGES", currentCourt.DEMJudges);
+                        newProperties.Add("GOPJUDGES", currentCourt.GOPJudges);
                         newProperties.Add("PARTISANSHIP", currentCourt.FindPartisanshipOfCourt());
                         Feature newFeature = new Feature(feature.Type, newProperties, feature.Geometry);
                         geo2.Features.Add(newFeature);
@@ -63,6 +65,8 @@ namespace PrepareGeojson
                         newProperties.Add("ACTIVE_JUDGES", currentCourt.ActiveJudges);
                         newProperties.Add("SENIOR_ELIGIBLE_JUDGES", currentCourt.SeniorEligibleJudges);
                         newProperties.Add("VACANCIES", currentCourt.GetNumberOfVacancies());
+                        newProperties.Add("DEMJUDGES", currentCourt.DEMJudges);
+                        newProperties.Add("GOPJUDGES", currentCourt.GOPJudges);
                         newProperties.Add("PARTISANSHIP", currentCourt.FindPartisanshipOfCourt());
                         Feature newFeature = new Feature(feature.Type, newProperties, feature.Geometry);
                         geo2.Features.Add(newFeature);
