@@ -2,18 +2,12 @@
 title: "PartiCourts"
 description: "Explore and analyze court data with PartiCourts"
 author: "Mikael"
-baseurl: "/DisplayMaps"
+baseurl: "/DisplayMaps" # This is correct for deployment in a subdirectory
 url: "https://Mikael-UofA.github.io"
 
 # Jekyll build settings
-include:
-  - DisplayMaps
-
-exclude:
-  - .github
-  - node_modules
-  - Gemfile
-  - Gemfile.lock
+source: ./DisplayMaps # Specify the source folder to restrict Jekyll to `DisplayMaps`
+destination: ./_site # Output folder remains `_site`
 
 # Markdown and content
 markdown: kramdown
