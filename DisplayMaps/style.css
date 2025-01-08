@@ -24,11 +24,9 @@ nav {
 }
 nav .navbar {
   position: relative;
-  max-width: 1300px;
-  padding: 0px 30px;
+  padding: 0px 20px;
   height: 70px;
   line-height: 70px;
-  margin: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
