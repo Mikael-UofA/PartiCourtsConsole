@@ -3,35 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PartiCourts - An interactive map to explore political leanings, judicial vacancies, and retirements in U.S. courts.">
+    <meta name="author" content="Mikael Nineza">
+    <meta name="keywords" content="map, courts, political leanings, U.S. courts, judiciary, district courts, circuit courts, vacancies, retirements, Partisanship">
+    <meta name="robots" content="index, follow">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
     <title>PartiCourts</title>
 </head>
 <body>
-    <nav>
+    <nav aria-label="Main navigation">
         <div class="navbar">
-          <div class="logo"><a href="#">PartiCourts</a></div>
-          <ol class="nav-links">
-            <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
-            <li><a href="#" class="about-popup">About</a></li>
-            <li>
-                <a href="#" class="court-display">District Courts</a>
-                <ol class="drop-menu court-type">
-                    <li><a href="#" class="selected unclickable" id="dcourts">District Courts</a></li>
-                    <li><a href="#" id="ccourts">Circuit Courts</a></li>
-                </ol>
-            </li>
-            <li>
-                <a href="#" class="mode-display">Partisanship</a>
-                <ol class="drop-menu mode-type">
-                    <li><a href="#" class="selected unclickable">Partisanship</a></li>
-                    <li><a href="#">Vacancies</a></li>
-                    <li><a href="#">Retirements</a></li>
-                    <li><a href="#">No Vacancies</a></li>
-                </ol>
-            </li>
-            <li><a href="https://github.com/Mikael-UofA/PartiCourtsConsole" target="_blank">Contribute</a></li>
-          </ol>
+            <div class="logo">
+                <a href="#" aria-label="PartiCourts homepage">PartiCourts</a>
+            </div>
+            <ol class="nav-links">
+                <li><a href="#" class="about-popup" aria-label="About PartiCourts">About</a></li>
+                <li>
+                    <a href="#" class="court-display">District Courts</a>
+                    <ol class="drop-menu court-type" aria-label="Court type selection">
+                        <li><a href="#" class="selected unclickable" aria-label="Select District Courts">District Courts</a></li>
+                        <li><a href="#" aria-label="Select Circuit Courts">Circuit Courts</a></li>
+                    </ol>
+                </li>
+                <li>
+                    <a href="#" class="mode-display">Partisanship</a>
+                    <ol class="drop-menu mode-type" aria-label="Map mode selection">
+                        <li><a href="#" class="selected unclickable" aria-label="Select Partisanship map mode">Partisanship</a></li>
+                        <li><a href="#" aria-label="Select Vacancies map mode">Vacancies</a></li>
+                        <li><a href="#" aria-label="Select Retirements map mode">Retirements</a></li>
+                        <li><a href="#" aria-label="Select No Vacancies map mode">No Vacancies</a></li>
+                    </ol>
+                </li>
+                <li><a href="https://github.com/Mikael-UofA/PartiCourtsConsole" target="_blank">Contribute</a></li>
+            </ol>
         </div>
     </nav>
     <div class="window hidden" tabindex="0">
@@ -39,7 +44,7 @@
             <div class="window__title">
             About
             </div>
-            <button class="window__btn">
+            <button class="window__btn" aria-label="Close About window">
                 &times;
             </button>
         </div>
@@ -80,7 +85,7 @@
             </p>
         </div>
     </div>
-    <div id="map"></div>
+    <div id="map" aria-label="Interactive map of U.S. courts"></div>
     <div class="map-legend" id="legend1">
         <p><strong>Legend</strong></p>
         <p style="color: blue;">Majority Democratic</p>
