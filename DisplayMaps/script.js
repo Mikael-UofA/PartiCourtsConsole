@@ -30,6 +30,7 @@ const elements = {
     modeDisplay: document.querySelector('.mode-display'),
     courtLinks: document.querySelectorAll('.court-type a'),
     modeLinks: document.querySelectorAll('.mode-type a'),
+    notImplemented: document.querySelector('.unavailable'),
     legends: {
         legend1: document.getElementById('legend1'),
         legend2: document.getElementById('legend2')
@@ -92,6 +93,11 @@ function handleModeChange(event, link) {
 
     updateLegend(currentSettings.mode);
     refreshMap();
+    if (link.textContent == "Retirements") {
+        elements.notImplemented.classList.remove("hidden");
+    } else {
+        elements.notImplemented.classList.add("hidden");
+    }
 }
 
 // Update Selected State
