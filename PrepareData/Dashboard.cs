@@ -9,7 +9,6 @@ namespace PrepareData
         private List<DistrictCourt> dcourts = new List<DistrictCourt>();
         private List<Judge> judges = new List<Judge>();
         private string geojsonDCPath = "../../../sources/dc_boundaries.geojson";
-        private string geojsonCCPath = "../../../sources/cc_boundaries.geojson";
         private DataAccess dataAccess1 = new DataAccess();
 
         public Dashboard()
