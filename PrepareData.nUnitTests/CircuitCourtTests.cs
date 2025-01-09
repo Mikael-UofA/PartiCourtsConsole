@@ -25,18 +25,19 @@ namespace PrepareData.nUnitTests
 
             int answer = circuitCourt.GetNumberOfVacancies();
 
-            Assert.That(solution, Is.EqualTo(answer));
+            Assert.That(answer, Is.EqualTo(solution));
         }
 
         [Test]
         public void SetPartisanshipOfCourt_EqualTest()
         {
-            int solutions = 0;
+            int solution = 0;
 
+            circuitCourt.ActiveJudges = 2;
             circuitCourt.SetPartisanshipOfCourt(judges);
             int answer = circuitCourt.FindPartisanshipOfCourt();
 
-            Assert.That(solutions, Is.EqualTo(answer));
+            Assert.That(answer, Is.EqualTo(solution));
         }
 
         [Test]
@@ -48,7 +49,7 @@ namespace PrepareData.nUnitTests
 
             string answer = circuitCourt.ChiefJudge;
 
-            Assert.That(solution, Is.EqualTo(answer));
+            Assert.That(answer, Is.EqualTo(solution));
         }
 
         [Test]
@@ -60,7 +61,7 @@ namespace PrepareData.nUnitTests
 
             int answer = circuitCourt.SeniorEligibleJudges;
 
-            Assert.That(solution, Is.EqualTo(answer));
+            Assert.That(answer, Is.EqualTo(solution));
         }
 
         [Test]
@@ -70,7 +71,7 @@ namespace PrepareData.nUnitTests
 
             string answer = circuitCourt.GetNoWhiteSpace();
 
-            Assert.That(solution, Is.EqualTo(answer));
+            Assert.That(answer, Is.EqualTo(solution));
         }
 
         [Test]
@@ -80,7 +81,7 @@ namespace PrepareData.nUnitTests
 
             string answer = circuitCourt.GetCircuitCourtName();
 
-            Assert.That(solution, Is.EqualTo(answer));
+            Assert.That(answer, Is.EqualTo(solution));
         }
     }
 }
