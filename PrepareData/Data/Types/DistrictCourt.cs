@@ -86,25 +86,11 @@ namespace PrepareData.Data.Types
             CourtOfAppeal = int.Parse(digits);
         }
 
-        public int GetNumberOfVacancies()
-        {
-            if (ActiveJudges != 0)
-            {
-                return MaxJudges - ActiveJudges;
-            }
-            return MaxJudges; // If there are no active judges, the bench is vacant
-        }
+        public int GetNumberOfVacancies() => MaxJudges - ActiveJudges;
 
         public void SetPartisanshipOfCourt(List<Judge> judges)
         {
-            DEMJudges = 0;
-            foreach (Judge judge in judges)
-            {
-                if (judge.Partisanship == 1)
-                {
-                    DEMJudges++; // Increment the Democratic judge count
-                }
-            }
+            DEMJudges = judges.Count(judge => judge.Partisanship == 1);
             GOPJudges = ActiveJudges - DEMJudges; // The remaining judges are assumed to be from the GOP
         }
 
@@ -123,26 +109,12 @@ namespace PrepareData.Data.Types
 
         public void FindChiefJudge(List<Judge> judges)
         {
-            foreach (Judge judge in judges)
-            {
-                if (judge.IsChief)
-                {
-                    ChiefJudge = judge.Name; // Set the chief judge's name
-                    break;
-                }
-            }
+            ChiefJudge = judges.FirstOrDefault(judge => judge.IsChief)?.Name;
         }
 
         public void FindNumOfSeniorEligibles(List<Judge> judges)
         {
-            SeniorEligibleJudges = 0;
-            foreach (Judge judge in judges)
-            {
-                if (judge.IsEligibleSeniorStatus())
-                {
-                    SeniorEligibleJudges++;
-                }
-            }
+            SeniorEligibleJudges = judges.Count(judge => judge.IsEligibleSeniorStatus());
         }
 
         public string GetNoWhiteSpace()
