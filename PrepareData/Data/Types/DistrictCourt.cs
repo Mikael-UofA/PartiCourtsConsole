@@ -2,8 +2,13 @@
 
 namespace PrepareData.Data.Types
 {
-    public class DistrictCourt: ICourt
+    /// <summary>
+    /// Represents a district court and its properties, including the number of judges, partisanship, and senior eligible judges.
+    /// Implements the <see cref="ICourt"/> interface.
+    /// </summary>
+    public class DistrictCourt : ICourt
     {
+       
         public int Id { get; set; }
         public string Name { get; }
         public string Abbreviation { get; }
@@ -15,7 +20,19 @@ namespace PrepareData.Data.Types
         public int DEMJudges { get; set; }
         public int GOPJudges { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DistrictCourt"/> class.
+        /// </summary>
         public DistrictCourt() { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DistrictCourt"/> class with specified parameters.
+        /// </summary>
+        /// <param name="name">The name of the district court.</param>
+        /// <param name="abbreviation">The abbreviation of the district court.</param>
+        /// <param name="courtOfAppeal">The court of appeal the district court is part of.</param>
+        /// <param name="maxJudges">The maximum number of judges allowed in the district court.</param>
+        /// <param name="chiefJudge">The name of the chief judge of the district court.</param>
         public DistrictCourt(string name, string abbreviation, string courtOfAppeal, int maxJudges, string chiefJudge)
         {
             Name = name;
@@ -25,7 +42,21 @@ namespace PrepareData.Data.Types
             ActiveJudges = 0;
             MakeAppeal(courtOfAppeal);
         }
-        public DistrictCourt(Int32 id, String name, String abbreviation, Int32 courtOfAppeal, Int32 activeJudges, 
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DistrictCourt"/> class with specified parameters.
+        /// </summary>
+        /// <param name="id">The unique identifier for the district court.</param>
+        /// <param name="name">The name of the district court.</param>
+        /// <param name="abbreviation">The abbreviation of the district court.</param>
+        /// <param name="courtOfAppeal">The court of appeal the district court is part of.</param>
+        /// <param name="activeJudges">The number of active judges in the district court.</param>
+        /// <param name="maxJudges">The maximum number of judges allowed in the district court.</param>
+        /// <param name="chiefJudge">The name of the chief judge of the district court.</param>
+        /// <param name="seniorEligibleJudges">The number of senior eligible judges in the district court.</param>
+        /// <param name="dem">The number of Democratic judges in the district court.</param>
+        /// <param name="gop">The number of Republican judges in the district court.</param>
+        public DistrictCourt(Int32 id, String name, String abbreviation, Int32 courtOfAppeal, Int32 activeJudges,
             Int32 maxJudges, String chiefJudge, Int32 seniorEligibleJudges, Int32 dem, Int32 gop)
         {
             Id = id;
@@ -40,6 +71,21 @@ namespace PrepareData.Data.Types
             GOPJudges = gop;
         }
 
+        /// <summary>
+        /// Sets the court of appeal based on the given appeal value.
+        /// </summary>
+        /// <param name="appeal">The court of appeal information as a string.</param>
+        private void MakeAppeal(string appeal)
+        {
+            if (appeal == "D.C.")
+            {
+                CourtOfAppeal = 0;
+                return;
+            }
+            string digits = appeal.Substring(0, appeal.Length - 2); // 1st, 3rd, 10th, ...
+            CourtOfAppeal = int.Parse(digits);
+        }
+
         public int GetNumberOfVacancies()
         {
             if (ActiveJudges != 0)
@@ -49,17 +95,6 @@ namespace PrepareData.Data.Types
             return MaxJudges;
         }
 
-        private void MakeAppeal(string appeal)
-        {
-            if (appeal == "D.C.")
-            {
-                CourtOfAppeal = 0;
-                return;
-            }
-            string digits = appeal.Substring(0, appeal.Length - 2);
-            CourtOfAppeal = int.Parse(digits);
-
-        }
         public void SetPartisanshipOfCourt(List<Judge> judges)
         {
             DEMJudges = 0;
@@ -72,6 +107,7 @@ namespace PrepareData.Data.Types
             }
             GOPJudges = ActiveJudges - DEMJudges;
         }
+
         public int FindPartisanshipOfCourt()
         {
             if (DEMJudges > GOPJudges)
@@ -114,7 +150,11 @@ namespace PrepareData.Data.Types
             return Name.Replace(" ", "_");
         }
 
-
+        /// <summary>
+        /// Sets the ID of the district court from a GeoJSON file.
+        /// </summary>
+        /// <param name="path">The file path of the GeoJSON data.</param>
+        /// <exception cref="Exception">Thrown if the ID cannot be generated from the GeoJSON data.</exception>
         public void SetIdFromGeoJson(string path)
         {
             string geoJsonContent = File.ReadAllText(path);
@@ -134,7 +174,6 @@ namespace PrepareData.Data.Types
                             {
                                 Id = Int32.Parse(properties["FID"].ToString());
                                 return;
-
                             }
                         }
                     }
@@ -142,7 +181,6 @@ namespace PrepareData.Data.Types
                 }
             }
             throw new Exception($"Couldn't generate ID of {Name}");
-
         }
     }
 }
