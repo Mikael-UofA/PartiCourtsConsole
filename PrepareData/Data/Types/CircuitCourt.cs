@@ -35,6 +35,9 @@ namespace PrepareData.Data.Types
             Name = name;
             ChiefJudge = "";
             ActiveJudges = 0;
+            DEMJudges = 0;
+            GOPJudges = 0;
+            SeniorEligibleJudges = 0;
             SupervisingJustice = supervisingJustice;
             MaxJudges = maxJudges;
         }
@@ -85,12 +88,12 @@ namespace PrepareData.Data.Types
             return 0; // Court is evenly split or nonpartisan
         }
 
-        public void FindChiefJudge(List<Judge> judges)
+        public void SetChiefJudge(List<Judge> judges)
         {
             ChiefJudge = judges.FirstOrDefault(judge => judge.IsChief)?.Name;
         }
 
-        public void FindNumOfSeniorEligibles(List<Judge> judges)
+        public void SetNumOfSeniorEligibles(List<Judge> judges)
         {
             SeniorEligibleJudges = judges.Count(judge => judge.IsEligibleSeniorStatus());
         }

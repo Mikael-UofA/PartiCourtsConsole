@@ -107,12 +107,12 @@ namespace PrepareData.Data.Types
             return 0; // Court is evenly split or nonpartisan
         }
 
-        public void FindChiefJudge(List<Judge> judges)
+        public void SetChiefJudge(List<Judge> judges)
         {
             ChiefJudge = judges.FirstOrDefault(judge => judge.IsChief)?.Name;
         }
 
-        public void FindNumOfSeniorEligibles(List<Judge> judges)
+        public void SetNumOfSeniorEligibles(List<Judge> judges)
         {
             SeniorEligibleJudges = judges.Count(judge => judge.IsEligibleSeniorStatus());
         }

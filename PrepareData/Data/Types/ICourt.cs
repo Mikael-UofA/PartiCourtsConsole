@@ -39,13 +39,13 @@ namespace PrepareData.Data.Types
         /// Finds and sets the chief judge from a list of judges.
         /// </summary>
         /// <param name="judges">A list of judges from which to identify the chief judge.</param>
-        void FindChiefJudge(List<Judge> judges);
+        void SetChiefJudge(List<Judge> judges);
 
         /// <summary>
         /// Finds and sets the number of senior-eligible judges from the given list of judges.
         /// </summary>
         /// <param name="judges">A list of judges to check for senior eligibility.</param>
-        void FindNumOfSeniorEligibles(List<Judge> judges);
+        void SetNumOfSeniorEligibles(List<Judge> judges);
 
         /// <summary>
         /// Returns the name of the court with all spaces replaced by underscores.

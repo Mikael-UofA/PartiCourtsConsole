@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrepareGeojson", "PrepareGe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library", "Library\Library.csproj", "{C5D02E70-4D3A-4F48-8135-D85B20CB1301}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrepareData.nUnitTests", "PrepareData.nUnitTests\PrepareData.nUnitTests.csproj", "{0C242D61-F335-4648-8E0C-8AD6E87D931F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C5D02E70-4D3A-4F48-8135-D85B20CB1301}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5D02E70-4D3A-4F48-8135-D85B20CB1301}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5D02E70-4D3A-4F48-8135-D85B20CB1301}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C242D61-F335-4648-8E0C-8AD6E87D931F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C242D61-F335-4648-8E0C-8AD6E87D931F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C242D61-F335-4648-8E0C-8AD6E87D931F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C242D61-F335-4648-8E0C-8AD6E87D931F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
