@@ -92,7 +92,7 @@ namespace PrepareData.Data.Types
             {
                 return MaxJudges - ActiveJudges;
             }
-            return MaxJudges;
+            return MaxJudges; // If there are no active judges, the bench is vacant
         }
 
         public void SetPartisanshipOfCourt(List<Judge> judges)
@@ -102,23 +102,23 @@ namespace PrepareData.Data.Types
             {
                 if (judge.Partisanship == 1)
                 {
-                    DEMJudges++;
+                    DEMJudges++; // Increment the Democratic judge count
                 }
             }
-            GOPJudges = ActiveJudges - DEMJudges;
+            GOPJudges = ActiveJudges - DEMJudges; // The remaining judges are assumed to be from the GOP
         }
 
         public int FindPartisanshipOfCourt()
         {
             if (DEMJudges > GOPJudges)
             {
-                return 1;
+                return 1; // Court leans Democratic
             }
             else if (DEMJudges < GOPJudges)
             {
-                return -1;
+                return -1; // Court leans Republican
             }
-            return 0;
+            return 0; // Court is evenly split or nonpartisan
         }
 
         public void FindChiefJudge(List<Judge> judges)
@@ -127,7 +127,7 @@ namespace PrepareData.Data.Types
             {
                 if (judge.IsChief)
                 {
-                    ChiefJudge = judge.Name;
+                    ChiefJudge = judge.Name; // Set the chief judge's name
                     break;
                 }
             }
