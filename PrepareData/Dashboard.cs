@@ -156,9 +156,7 @@ namespace PrepareData
         {
             try
             {
-                Judge test = new Judge("Demo", true, 3, 1979, "Chief Judge", "Obama", 2014, true);
-                DataAccess dataAccess = new DataAccess();
-                dataAccess.DeleteJudge(test);
+                Helper.DeleteDB();
                 ChangeStatus(1);
             }
             catch (Exception ex)
