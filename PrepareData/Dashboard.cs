@@ -82,8 +82,8 @@ namespace PrepareData
                     List<Judge> returning = await WikipediaScrapper.GetCJudges(court);
                     court.ActiveJudges = returning.Count;
                     court.SetPartisanshipOfCourt(returning);
-                    court.FindChiefJudge(returning);
-                    court.FindNumOfSeniorEligibles(returning);
+                    court.SetChiefJudge(returning);
+                    court.SetNumOfSeniorEligibles(returning);
                     judges.AddRange(returning);
                 }
                 foreach (DistrictCourt court in dcourts)
@@ -91,7 +91,7 @@ namespace PrepareData
                     List<Judge> returning = await WikipediaScrapper.GetDJudges(court);
                     court.ActiveJudges = returning.Count;
                     court.SetPartisanshipOfCourt(returning);
-                    court.FindNumOfSeniorEligibles(returning);
+                    court.SetNumOfSeniorEligibles(returning);
                     judges.AddRange(returning);
                 }
                 DisableEnableButton(JudgesButton, StoreDBButton);
@@ -110,7 +110,7 @@ namespace PrepareData
             ChangeStatus(0);
             try
             {
-                dataAccess1.InsertCurcuitCourts(ccourts);
+                dataAccess1.InsertCircuitCourts(ccourts);
                 dataAccess1.InsertDistrictCourts(dcourts);
                 dataAccess1.InsertJudges(judges);
                 DisableEnableButton(StoreDBButton, null);
@@ -197,7 +197,7 @@ namespace PrepareData
         private async void UpdateTabsButton_Click(object sender, EventArgs e)
         {
             ChangeStatus(0);
-            ccourts = dataAccess1.GetCurcuitCourts();
+            ccourts = dataAccess1.GetCircuitCourts();
             dcourts = dataAccess1.GetDistrictCourts();
             judges = new List<Judge>();
             try 
@@ -207,8 +207,8 @@ namespace PrepareData
                     List<Judge> returning = await WikipediaScrapper.GetCJudges(curcuit);
                     curcuit.ActiveJudges = returning.Count;
                     curcuit.SetPartisanshipOfCourt(returning);
-                    curcuit.FindChiefJudge(returning);
-                    curcuit.FindNumOfSeniorEligibles(returning);
+                    curcuit.SetChiefJudge(returning);
+                    curcuit.SetNumOfSeniorEligibles(returning);
                     judges.AddRange(returning);
 
                 }
@@ -217,14 +217,14 @@ namespace PrepareData
                     List<Judge> returning = await WikipediaScrapper.GetDJudges(district);
                     district.ActiveJudges = returning.Count;
                     district.SetPartisanshipOfCourt(returning);
-                    district.FindChiefJudge(returning);
-                    district.FindNumOfSeniorEligibles(returning);
+                    district.SetChiefJudge(returning);
+                    district.SetNumOfSeniorEligibles(returning);
                     judges.AddRange(returning);
                 }
 
                 dataAccess1.ClearTable("Judges");
                 dataAccess1.InsertJudges(judges);
-                dataAccess1.UpdateCurcuitCourts(ccourts);
+                dataAccess1.UpdateCircuitCourts(ccourts);
                 dataAccess1.UpdateDistrictCourts(dcourts);
                 ChangeStatus(1);
             }

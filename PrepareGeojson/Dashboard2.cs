@@ -100,7 +100,7 @@ namespace PrepareGeojson
             ChangeStatus(0);
             try
             {
-                ccourts = dataAccess2.GetCurcuitCourts();
+                ccourts = dataAccess2.GetCircuitCourts();
                 ChangeStatus(1);
 
                 CCourtsButton.Enabled = false;

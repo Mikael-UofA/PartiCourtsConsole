@@ -31,17 +31,17 @@ namespace PrepareData.Data.Types
         /// Initializes a new instance of the <see cref="Judge"/> class with specified properties.
         /// </summary>
         /// <param name="name">The name of the judge.</param>
-        /// <param name="isCurcuit">Indicates whether the judge is a circuit judge.</param>
+        /// <param name="isCircuit">Indicates whether the judge is a circuit judge.</param>
         /// <param name="court">The court the judge belongs to.</param>
         /// <param name="yearOfBirth">The birth year of the judge.</param>
         /// <param name="title">The title of the judge.</param>
         /// <param name="appointedBy">The president who appointed the judge.</param>
         /// <param name="appointmentYear">The year the judge was appointed.</param>
         /// <param name="isChief">Indicates whether the judge is the chief judge.</param>
-        public Judge(string name, bool isCurcuit, int court, int yearOfBirth, string title, string appointedBy, int appointmentYear, bool isChief)
+        public Judge(string name, bool isCircuit, int court, int yearOfBirth, string title, string appointedBy, int appointmentYear, bool isChief)
         {
             Name = name;
-            IsCircuitJudge = isCurcuit;
+            IsCircuitJudge = isCircuit;
             Court = court;
             Title = title;
             AppointedBy = appointedBy;

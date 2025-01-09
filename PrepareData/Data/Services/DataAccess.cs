@@ -31,7 +31,7 @@ namespace PrepareData.Data.Services
         /// Retrieves all Circuit Courts from the database.
         /// </summary>
         /// <returns>A list of <see cref="CircuitCourt"/> objects representing the Circuit Courts.</returns>
-        public List<CircuitCourt> GetCurcuitCourts()
+        public List<CircuitCourt> GetCircuitCourts()
         {
             using (IDbConnection connection = new Microsoft.Data.SqlClient.SqlConnection(Helper.CnnVal(cnnVal)))
             {
@@ -48,7 +48,7 @@ namespace PrepareData.Data.Services
         {
             using (IDbConnection connection = new Microsoft.Data.SqlClient.SqlConnection(Helper.CnnVal(cnnVal)))
             {
-                return connection.Query<Judge>($"SELECT * FROM Judges WHERE isCurcuitJudge = False AND Court = '{districtId}'").ToList();
+                return connection.Query<Judge>($"SELECT * FROM Judges WHERE isCircuitJudge = False AND Court = '{districtId}'").ToList();
             }
         }
 
@@ -57,11 +57,11 @@ namespace PrepareData.Data.Services
         /// </summary>
         /// <param name="curcuitId">The ID of the Circuit Court.</param>
         /// <returns>A list of <see cref="Judge"/> objects representing Circuit Judges.</returns>
-        public List<Judge> GetCurcuitJudges(int curcuitId)
+        public List<Judge> GetCircuitJudges(int curcuitId)
         {
             using (IDbConnection connection = new Microsoft.Data.SqlClient.SqlConnection(Helper.CnnVal(cnnVal)))
             {
-                return connection.Query<Judge>($"SELECT * FROM Judges WHERE isCurcuitJudge = True AND Court = '{curcuitId}'").ToList();
+                return connection.Query<Judge>($"SELECT * FROM Judges WHERE isCircuitJudge = True AND Court = '{curcuitId}'").ToList();
             }
         }
 
@@ -69,7 +69,7 @@ namespace PrepareData.Data.Services
         /// Inserts a list of Circuit Courts into the database.
         /// </summary>
         /// <param name="curcuitCourts">The list of <see cref="CircuitCourt"/> objects to insert.</param>
-        public void InsertCurcuitCourts(List<CircuitCourt> curcuitCourts)
+        public void InsertCircuitCourts(List<CircuitCourt> curcuitCourts)
         {
             using (IDbConnection connection = new Microsoft.Data.SqlClient.SqlConnection(Helper.CnnVal(cnnVal)))
             {
@@ -111,9 +111,9 @@ namespace PrepareData.Data.Services
             {
                 string sqlQuery = @"
                 INSERT INTO Judges 
-                (Name, IsCurcuitJudge, Court, Title, AppointedBy, YearOfBirth, AppointmentYear, IsChief, Partisanship) 
+                (Name, IsCircuitJudge, Court, Title, AppointedBy, YearOfBirth, AppointmentYear, IsChief, Partisanship) 
                 VALUES 
-                (@Name, @IsCurcuitJudge, @Court, @Title, @AppointedBy, @YearOfBirth, @AppointmentYear, @IsChief, @Partisanship)";
+                (@Name, @IsCircuitJudge, @Court, @Title, @AppointedBy, @YearOfBirth, @AppointmentYear, @IsChief, @Partisanship)";
 
                 connection.Execute(sqlQuery, judges);
             }
@@ -196,7 +196,7 @@ namespace PrepareData.Data.Services
         /// Updates Circuit Courts with the provided data.
         /// </summary>
         /// <param name="curcuitCourts">The list of <see cref="CircuitCourt"/> objects to update.</param>
-        public void UpdateCurcuitCourts(List<CircuitCourt> curcuitCourts)
+        public void UpdateCircuitCourts(List<CircuitCourt> curcuitCourts)
         {
             using (IDbConnection connection = new Microsoft.Data.SqlClient.SqlConnection(Helper.CnnVal(cnnVal)))
             {
