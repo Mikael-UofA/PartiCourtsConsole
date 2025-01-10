@@ -21,7 +21,7 @@ namespace PrepareData.nUnitTests
         [Test]
         public void GetNumberOfVacancies_EqualTest()
         {
-            int solution = 7;
+            int solution = circuitCourt.MaxJudges;
 
             int answer = circuitCourt.GetNumberOfVacancies();
 
