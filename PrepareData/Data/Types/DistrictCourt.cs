@@ -75,7 +75,7 @@ namespace PrepareData.Data.Types
         /// Sets the court of appeal based on the given appeal value.
         /// </summary>
         /// <param name="appeal">The court of appeal information as a string.</param>
-        private void MakeAppeal(string appeal)
+        public void MakeAppeal(string appeal)
         {
             if (appeal == "D.C.")
             {
