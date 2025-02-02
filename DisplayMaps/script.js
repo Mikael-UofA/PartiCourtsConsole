@@ -15,13 +15,14 @@ const colorMappings = {
     partisanship: { '1': 'blue', '-1': 'red', '0': 'purple' },
     vacancies: { '0': '#FFFFFF', '1': '#818089', '2': '#F53778' }
 };
-const defaultColors = '#9C0B0A'; // Default fallback color
+const defaultColors = '#9C0B0A';
 let currentSettings = {
     mode: 'PARTISANSHIP',
     geoPath: geojsonPaths.district,
-    colorMapping: colorMappings.partisanship
+    colorMapping: colorMappings.partisanship,
+    currentPresident: -1
 };
-// DOM Elements
+
 const elements = {
     aboutLink: document.querySelector('.about-popup'),
     modalPopup: document.querySelector('.window'),
@@ -37,7 +38,6 @@ const elements = {
     }
 };
 
-// Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
     initializeMap();
     setupEventListeners();
@@ -93,7 +93,7 @@ function handleModeChange(event, link) {
 
     updateLegend(currentSettings.mode);
     refreshMap();
-    if (link.textContent == "Retirements") {
+    if (link.textContent == "Future Vacancies") {
         elements.notImplemented.classList.remove("hidden");
     } else {
         elements.notImplemented.classList.add("hidden");
@@ -155,7 +155,7 @@ function loadGeoJSON(path) {
 
 // Determine Feature Coloring Property
 function getColoringProperty(feature) {
-    return currentSettings.mode === 'NO VACANCIES'
+    return currentSettings.mode === 'FILLED VACANCIES'
         ? getPartisanshipIfFilled(feature)
         : feature.properties[currentSettings.mode];
 }
