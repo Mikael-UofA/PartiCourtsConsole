@@ -134,7 +134,7 @@ namespace PrepareData
                 ChangeStatus(-1);
                 MessageBox.Show(ex.Message);
             }
-          
+
         }
 
         private void DemoIntButton_Click(object sender, EventArgs e)
@@ -199,7 +199,7 @@ namespace PrepareData
             ccourts = dataAccess1.GetCircuitCourts();
             dcourts = dataAccess1.GetDistrictCourts();
             judges = new List<Judge>();
-            try 
+            try
             {
                 foreach (CircuitCourt curcuit in ccourts)
                 {
@@ -231,9 +231,14 @@ namespace PrepareData
             {
                 ChangeStatus(-1);
             }
-                
-                
 
+
+
+        }
+
+        private async void RetirementsButton_Click(object sender, EventArgs e)
+        {
+            await GovScrapper.FetchRetiringJudges();
         }
     }
 }

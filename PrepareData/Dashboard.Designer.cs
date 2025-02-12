@@ -38,6 +38,7 @@
             DropTablesButton = new Button();
             StatusBox = new RichTextBox();
             UpdateTabsButton = new Button();
+            RetirementsButton = new Button();
             SuspendLayout();
             // 
             // CCourtsButton
@@ -160,11 +161,23 @@
             UpdateTabsButton.UseVisualStyleBackColor = false;
             UpdateTabsButton.Click += UpdateTabsButton_Click;
             // 
+            // RetirementsButton
+            // 
+            RetirementsButton.BackColor = Color.IndianRed;
+            RetirementsButton.Location = new Point(24, 141);
+            RetirementsButton.Name = "RetirementsButton";
+            RetirementsButton.Size = new Size(139, 56);
+            RetirementsButton.TabIndex = 10;
+            RetirementsButton.Text = "Get Retirements";
+            RetirementsButton.UseVisualStyleBackColor = false;
+            RetirementsButton.Click += RetirementsButton_Click;
+            // 
             // Dashboard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(RetirementsButton);
             Controls.Add(UpdateTabsButton);
             Controls.Add(StatusBox);
             Controls.Add(DropTablesButton);
@@ -193,5 +206,6 @@
         private Button DropTablesButton;
         private RichTextBox StatusBox;
         private Button UpdateTabsButton;
+        private Button RetirementsButton;
     }
 }
