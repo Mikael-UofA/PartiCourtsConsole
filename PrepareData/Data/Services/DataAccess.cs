@@ -221,6 +221,16 @@ namespace PrepareData.Data.Services
                 }
             }
         }
+
+        public void UpdateRetiringJudges(List<Dictionary<string, Object>> judges)
+        {
+
+            foreach (Dictionary<string, Object> judge in judges)
+            {
+                string direction = "";
+
+            }
+        }
     }
 
 }

@@ -27,10 +27,12 @@ namespace PrepareData.Data.Services
                         var cells = row.SelectNodes(".//td");
                         if (cells != null)
                         {
-                            judges.Add(OrganizeRow(cells));
+                            var map = OrganizeRow(cells);
+                            MessageBox.Show(map["judgeName"] + ", " + map["courtDiv"] + " District of " + map["courtName"]);
+                            judges.Add(map);
                         }
-                        return judges;
                     }
+                    return judges;
                 }
                 else
                 {
@@ -50,14 +52,23 @@ namespace PrepareData.Data.Services
             string[] court = cells[0].InnerText.Trim().Split("-");
             string[] judge = cells[1].InnerText.Trim().Split(",");
 
-            map["courtNum"] = court[0];
-            map["isCircuit"] = court[1] == "CCA" ? true : false;
-            map["courtName"] = court[1];
+            map["courtNum"] = court[0].Trim();
+            map["courtName"] = "N/A";
+            map["courtDiv"] = "";
+            if (court[1].Trim() == "CCA")
+            {
+                map["isCircuit"] = true;
+            } else
+            {
+                map["isCircuit"] = false;
+                map["courtName"] = USStateLookup.GetStateName(court[1].Trim());
+            }
+        
             if (court.Length == 3)
             {
-                map["courtDiv"] = court[2];
+                map["courtDiv"] = USStateLookup.GetDivision(court[2].Trim());
             }
-            map["judgeName"] = judge[1] + " " + judge[0];
+            map["judgeName"] = judge[1].Trim() + " " + judge[0].Trim();
 
             return map;
 
