@@ -14,6 +14,8 @@ namespace PrepareData.Data.Types
         int SeniorEligibleJudges { get; set; }
         int DEMJudges { get; set; }
         int GOPJudges { get; set; }
+        int DEMRetiring {  get; set; }
+        int GOPRetiring { get; set; }
 
         /// <summary>
         /// Calculates and returns the number of vacant judge positions in the court.
@@ -52,5 +54,11 @@ namespace PrepareData.Data.Types
         /// </summary>
         /// <returns>The name of the court with no white spaces.</returns>
         string GetNoWhiteSpace();
+
+        /// <summary>
+        /// Adds the retiring judge to the corresponding party retirement count.
+        /// </summary>
+        /// <param name="judge">A judge to find their partisanship.</param>
+        void AddToRetiring(Judge judge);
     }
 }

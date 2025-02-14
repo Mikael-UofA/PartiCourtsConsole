@@ -171,7 +171,7 @@ namespace PrepareData.Data.Services
                         {
                             string name = cells[0].InnerText.Trim();
                             string supervisingJustice = cells[1].InnerText.Trim();
-                            int maxJudges = Int32.Parse(cells[2].InnerText.Trim());
+                            int maxJudges = int.Parse(cells[2].InnerText.Trim());
                             CircuitCourt court = new(i, name, supervisingJustice, maxJudges);
                             courts.Add(court);
                         }
@@ -213,7 +213,7 @@ namespace PrepareData.Data.Services
                             string abbreviation = cells[1].InnerText.Trim();
                             string courtOfAppeal = cells[2].InnerText.Trim();
                             string chiefJudge = cells[6].InnerText.Trim();
-                            int maxJudges = Int32.Parse(cells[4].InnerText.Trim());
+                            int maxJudges = int.Parse(cells[4].InnerText.Trim());
                             DistrictCourt court = new(name, abbreviation, courtOfAppeal, maxJudges, chiefJudge);
                             courts.Add(court);
                         }

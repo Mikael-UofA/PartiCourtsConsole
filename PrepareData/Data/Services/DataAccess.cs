@@ -93,9 +93,9 @@ namespace PrepareData.Data.Services
             {
                 string sqlQuery = @"
                 INSERT INTO DCourts 
-                (Id, Name, Abbreviation, CourtOfAppeal, ActiveJudges, MaxJudges, ChiefJudge, SeniorEligibleJudges, DEMJudges, GOPJudges) 
+                (Id, Name, Abbreviation, CourtOfAppeal, ActiveJudges, MaxJudges, ChiefJudge, SeniorEligibleJudges, DEMJudges, GOPJudges, DEMRetiring, GOPRetiring) 
                 VALUES 
-                (@Id, @Name, @Abbreviation, @CourtOfAppeal, @ActiveJudges, @MaxJudges, @ChiefJudge, @SeniorEligibleJudges, @DEMJudges, @GOPJudges)";
+                (@Id, @Name, @Abbreviation, @CourtOfAppeal, @ActiveJudges, @MaxJudges, @ChiefJudge, @SeniorEligibleJudges, @DEMJudges, @GOPJudges, @DEMRetiring, @GOPRetiring)";
 
                 connection.Execute(sqlQuery, districtCourts);
             }
@@ -111,9 +111,9 @@ namespace PrepareData.Data.Services
             {
                 string sqlQuery = @"
                 INSERT INTO Judges 
-                (Name, IsCircuitJudge, Court, Title, AppointedBy, YearOfBirth, AppointmentYear, IsChief, Partisanship) 
+                (Name, IsCircuitJudge, Court, Title, AppointedBy, YearOfBirth, AppointmentYear, IsChief, Partisanship, IsRetiring) 
                 VALUES 
-                (@Name, @IsCircuitJudge, @Court, @Title, @AppointedBy, @YearOfBirth, @AppointmentYear, @IsChief, @Partisanship)";
+                (@Name, @IsCircuitJudge, @Court, @Title, @AppointedBy, @YearOfBirth, @AppointmentYear, @IsChief, @Partisanship, @IsRetiring)";
 
                 connection.Execute(sqlQuery, judges);
             }
@@ -222,15 +222,6 @@ namespace PrepareData.Data.Services
             }
         }
 
-        public void UpdateRetiringJudges(List<Dictionary<string, Object>> judges)
-        {
-
-            foreach (Dictionary<string, Object> judge in judges)
-            {
-                string direction = "";
-
-            }
-        }
     }
 
 }

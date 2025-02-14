@@ -19,6 +19,8 @@ namespace PrepareData.Data.Types
         public int SeniorEligibleJudges { get; set; }
         public int DEMJudges { get; set; }
         public int GOPJudges { get; set; }
+        public int DEMRetiring { get; set; }
+        public int GOPRetiring { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DistrictCourt"/> class.
@@ -41,6 +43,8 @@ namespace PrepareData.Data.Types
             ChiefJudge = chiefJudge;
             ActiveJudges = 0;
             MakeAppeal(courtOfAppeal);
+            DEMRetiring = 0;
+            GOPRetiring = 0;
         }
 
         /// <summary>
@@ -56,8 +60,10 @@ namespace PrepareData.Data.Types
         /// <param name="seniorEligibleJudges">The number of senior eligible judges in the district court.</param>
         /// <param name="dem">The number of Democratic judges in the district court.</param>
         /// <param name="gop">The number of Republican judges in the district court.</param>
-        public DistrictCourt(Int32 id, String name, String abbreviation, Int32 courtOfAppeal, Int32 activeJudges,
-            Int32 maxJudges, String chiefJudge, Int32 seniorEligibleJudges, Int32 dem, Int32 gop)
+        /// <param name="demRetiring">The number of Democratic judges that are retiring in the district court.</param>
+        /// <param name="gopRetiring">The number of Republican judges that are retiring in the district court.</param>
+        public DistrictCourt(int id, string name, string abbreviation, int courtOfAppeal, int activeJudges,
+            int maxJudges, string chiefJudge, int seniorEligibleJudges, int dem, int gop, int demRetiring, int gopRetiring)
         {
             Id = id;
             Name = name;
@@ -69,6 +75,8 @@ namespace PrepareData.Data.Types
             SeniorEligibleJudges = seniorEligibleJudges;
             DEMJudges = dem;
             GOPJudges = gop;
+            DEMRetiring = demRetiring;
+            GOPRetiring = gopRetiring;
         }
 
         /// <summary>
@@ -122,6 +130,17 @@ namespace PrepareData.Data.Types
             return Name.Replace(" ", "_");
         }
 
+        public void AddToRetiring(Judge judge)
+        {
+            if (judge.Partisanship == 1)
+            {
+                DEMRetiring += 1;
+            } else
+            {
+                GOPRetiring += 1;
+            }
+        }
+
         /// <summary>
         /// Sets the ID of the district court from a GeoJSON file.
         /// </summary>
@@ -144,7 +163,7 @@ namespace PrepareData.Data.Types
                         {
                             if (properties["FID"].ToString() != null)
                             {
-                                Id = Int32.Parse(properties["FID"].ToString());
+                                Id = int.Parse(properties["FID"].ToString());
                                 return;
                             }
                         }

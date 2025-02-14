@@ -21,6 +21,7 @@ namespace PrepareData.Data.Types
         public int AppointmentYear { get; set; }
         public bool IsChief { get; set; }
         public int Partisanship { get; set; }
+        public bool IsRetiring { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Judge"/> class with default values.
@@ -38,7 +39,7 @@ namespace PrepareData.Data.Types
         /// <param name="appointedBy">The president who appointed the judge.</param>
         /// <param name="appointmentYear">The year the judge was appointed.</param>
         /// <param name="isChief">Indicates whether the judge is the chief judge.</param>
-        public Judge(string name, bool isCircuit, int court, int yearOfBirth, string title, string appointedBy, int appointmentYear, bool isChief)
+        public Judge(string name, bool isCircuit, int court, int yearOfBirth, string title, string appointedBy, int appointmentYear, bool isChief, bool isRetiring)
         {
             Name = name;
             IsCircuitJudge = isCircuit;
@@ -49,6 +50,7 @@ namespace PrepareData.Data.Types
             AppointmentYear = appointmentYear;
             IsChief = isChief;
             MakePartisanship();
+            IsRetiring = isRetiring;
         }
 
         /// <summary>

@@ -16,6 +16,8 @@ namespace PrepareData.Data.Types
         public int SeniorEligibleJudges { get; set; }
         public int DEMJudges { get; set; }
         public int GOPJudges { get; set; }
+        public int DEMRetiring { get; set; }
+        public int GOPRetiring { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CircuitCourt"/> class with default values.
@@ -54,7 +56,7 @@ namespace PrepareData.Data.Types
         /// <param name="seniorEligibleJudges">The number of senior-eligible judges.</param>
         /// <param name="dem">The number of Democratic judges.</param>
         /// <param name="gop">The number of Republican judges.</param>
-        public CircuitCourt(int id, string name, string supervisingJustice, string chiefJudge, int activeJudges, int maxJudges, int seniorEligibleJudges, int dem, int gop)
+        public CircuitCourt(int id, string name, string supervisingJustice, string chiefJudge, int activeJudges, int maxJudges, int seniorEligibleJudges, int dem, int gop, int demRetiring, int gopRetiring)
         {
             Id = id;
             Name = name;
@@ -65,6 +67,8 @@ namespace PrepareData.Data.Types
             SeniorEligibleJudges = seniorEligibleJudges;
             DEMJudges = dem;
             GOPJudges = gop;
+            DEMRetiring = demRetiring;
+            GOPRetiring = gopRetiring;
         }
 
         public int GetNumberOfVacancies() => MaxJudges - ActiveJudges;
@@ -101,6 +105,18 @@ namespace PrepareData.Data.Types
         public string GetNoWhiteSpace()
         {
             return GetCircuitCourtName().Replace(" ", "_");
+        }
+
+        public void AddToRetiring(Judge judge)
+        {
+            if (judge.Partisanship == 1)
+            {
+                DEMRetiring += 1;
+            }
+            else
+            {
+                GOPRetiring += 1;
+            }
         }
 
         /// <summary>
