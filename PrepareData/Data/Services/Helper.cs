@@ -12,9 +12,8 @@ namespace PrepareData.Data.Services
         /// <summary>
         /// A demo Judge instance used for testing database operations.
         /// </summary>
-        private static readonly Judge test = new Judge("Demo", true, 3, 1979, "Chief Judge", "Obama", 2014, true);
+        private static readonly Judge test = new Judge("Demo", true, 3, 1979, "Chief Judge", "Obama", 2014, true, false);
 
-        private static readonly DataAccess dataAccess = new DataAccess();
 
         /// <summary>
         /// Retrieves the connection string for the specified database.
@@ -44,7 +43,7 @@ namespace PrepareData.Data.Services
         public static void InsertDB()
         {
             List<Judge> list = [test];
-            dataAccess.InsertJudges(list);
+            DataAccess.InsertJudges(list);
         }
 
         /// <summary>
@@ -52,7 +51,7 @@ namespace PrepareData.Data.Services
         /// </summary>
         public static void DeleteDB()
         {
-            dataAccess.DeleteJudge(test);
+            DataAccess.DeleteJudge(test);
         }
     }
 }

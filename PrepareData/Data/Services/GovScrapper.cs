@@ -3,11 +3,11 @@ namespace PrepareData.Data.Services
 {
     public class GovScrapper
     {
-        public static async Task<List<Dictionary<string, Object>>?> FetchRetiringJudges()
+        public static async Task<List<Dictionary<string, Object>>> FetchRetiringJudges()
         {
             string url = "https://www.uscourts.gov/data-news/judicial-vacancies/current-judicial-vacancies";
             using HttpClient client = new();
-
+            List<Dictionary<string, Object>> judges = [];
             try
             {
                 string html = await client.GetStringAsync(url);
@@ -19,7 +19,6 @@ namespace PrepareData.Data.Services
 
                 if (tbody != null)
                 {
-                    List<Dictionary<string, Object>> judges = [];
                     var rows = tbody.SelectNodes(".//tr");
 
                     foreach (var row in rows)
@@ -28,7 +27,6 @@ namespace PrepareData.Data.Services
                         if (cells != null)
                         {
                             var map = OrganizeRow(cells);
-                            MessageBox.Show(map["judgeName"] + ", " + map["courtDiv"] + " District of " + map["courtName"]);
                             judges.Add(map);
                         }
                     }
@@ -43,7 +41,7 @@ namespace PrepareData.Data.Services
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
-            return null;
+            return judges;
             
         }
         private static Dictionary<string, Object> OrganizeRow(HtmlAgilityPack.HtmlNodeCollection cells)
@@ -52,7 +50,9 @@ namespace PrepareData.Data.Services
             string[] court = cells[0].InnerText.Trim().Split("-");
             string[] judge = cells[1].InnerText.Trim().Split(",");
 
-            map["courtNum"] = court[0].Trim();
+
+            string temp = "";
+            map["courtNum"] = Int32.Parse(court[0].Trim());
             map["courtName"] = "N/A";
             map["courtDiv"] = "";
             if (court[1].Trim() == "CCA")
@@ -60,13 +60,13 @@ namespace PrepareData.Data.Services
                 map["isCircuit"] = true;
             } else
             {
+                if (court.Length == 3)
+                {
+                    temp = USStateLookup.GetDivision(court[2].Trim()) + " "; 
+                }
                 map["isCircuit"] = false;
-                map["courtName"] = USStateLookup.GetStateName(court[1].Trim());
-            }
-        
-            if (court.Length == 3)
-            {
-                map["courtDiv"] = USStateLookup.GetDivision(court[2].Trim());
+                map["courtName"] = temp + "District of " + USStateLookup.GetStateName(court[1].Trim());
+                map["courtNum"] = DistrictCourtLookup.GetDistrictID((string) map["courtName"]);
             }
             map["judgeName"] = judge[1].Trim() + " " + judge[0].Trim();
 

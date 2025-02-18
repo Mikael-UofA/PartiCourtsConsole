@@ -130,14 +130,24 @@ namespace PrepareData.Data.Types
             return Name.Replace(" ", "_");
         }
 
-        public void AddToRetiring(Judge judge)
+        public void AddToRetiring(List<Judge> judges)
         {
-            if (judge.Partisanship == 1)
+            DEMRetiring = 0;
+            GOPRetiring = 0;
+            foreach (Judge judge in judges)
             {
-                DEMRetiring += 1;
-            } else
-            {
-                GOPRetiring += 1;
+                if (judge.IsRetiring)
+                {
+                    if (judge.Partisanship == 1)
+                    {
+                        DEMRetiring += 1;
+                    }
+                    else
+                    {
+                        GOPRetiring += 1;
+                    }
+
+                }
             }
         }
 

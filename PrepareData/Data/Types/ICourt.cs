@@ -4,7 +4,7 @@ namespace PrepareData.Data.Types
     /// <summary>
     /// Interface representing the structure of a court, defining required properties and methods for implementation.
     /// </summary>
-    internal interface ICourt
+    public interface ICourt
     {
         int Id { get; set; }
         string Name { get; }
@@ -58,7 +58,7 @@ namespace PrepareData.Data.Types
         /// <summary>
         /// Adds the retiring judge to the corresponding party retirement count.
         /// </summary>
-        /// <param name="judge">A judge to find their partisanship.</param>
-        void AddToRetiring(Judge judge);
+        /// <param name="judges">List of judges from this court.</param>
+        void AddToRetiring(List<Judge> judges);
     }
 }

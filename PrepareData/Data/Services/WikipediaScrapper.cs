@@ -26,7 +26,7 @@ namespace PrepareData.Data.Services
         /// <returns>True if the judge is valid; otherwise, false.</returns>
         private static bool IsValidJudge(string title, string name, string endDate)
         {
-            return title != "Senior Judge" && name != "vacant" && !endDate.StartsWith("beg");
+            return title != "Senior Judge" && title != "Senior Circuit Judge" && name != "vacant" && !endDate.StartsWith("beg");
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace PrepareData.Data.Services
             }
             else
             {
-                MessageBox.Show("No content found for the page.");
+                MessageBox.Show("No content found for the page. #1");
             }
             return temp;
         }
@@ -97,7 +97,7 @@ namespace PrepareData.Data.Services
             }
             else
             {
-                MessageBox.Show("No content found for the page.");
+                MessageBox.Show("No content found for the page. #2");
             }
             return temp;
         }
@@ -110,6 +110,10 @@ namespace PrepareData.Data.Services
         public static async Task<List<Judge>> GetDJudges(DistrictCourt court)
         {
             string pageName = "United_States_District_Court_for_the_" + court.GetNoWhiteSpace();
+            if (court.Name == "District of the District of Columbia")
+            {
+                pageName = "United_States_District_Court_for_the_District_of_Columbia";
+            }
             List<Judge> temp = new List<Judge>();
             string? htmlContent = await FetchPageContentAsync(pageName);
             if (!string.IsNullOrEmpty(htmlContent))
@@ -118,7 +122,7 @@ namespace PrepareData.Data.Services
             }
             else
             {
-                MessageBox.Show("No content found for the page.");
+                MessageBox.Show("No content found for the page. #3 " + court.Name);
             }
             return temp;
         }
@@ -139,7 +143,7 @@ namespace PrepareData.Data.Services
             }
             else
             {
-                MessageBox.Show("No content found for the page.");
+                MessageBox.Show("No content found for the page. #4");
             }
             return temp;
         }
@@ -263,7 +267,7 @@ namespace PrepareData.Data.Services
                             string temp2 = temp1[..4];
                             _ = int.TryParse(temp2, out int appointmentDate);
 
-                            Judge judge = new(name, false, court.Id, birth, title, appointedBy, appointmentDate, isChief);
+                            Judge judge = new(name, false, court.Id, birth, title, appointedBy, appointmentDate, isChief, false);
                             judges.Add(judge);
                         }
                     }
@@ -314,7 +318,7 @@ namespace PrepareData.Data.Services
                             string temp2 = temp1[..4];
                             _ = int.TryParse(temp2, out int appointmentDate);
 
-                            Judge judge = new(name, true, courtId, birth, title, appointedBy, appointmentDate, isChief);
+                            Judge judge = new(name, true, courtId, birth, title, appointedBy, appointmentDate, isChief, false);
                             judges.Add(judge);
                         }
                     }
