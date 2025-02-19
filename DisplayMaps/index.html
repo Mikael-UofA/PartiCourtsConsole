@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="PartiCourts - An interactive map to explore political leanings, judicial vacancies, and retirements in U.S. courts.">
     <meta name="author" content="Mikael Nineza">
-    <meta name="keywords" content="map, courts, political leanings, U.S. courts, judiciary, district courts, circuit courts, vacancies, retirements, Partisanship">
+    <meta name="keywords" content="map, courts, political leanings, U.S. courts, judiciary, district courts, circuit courts, vacancies, retirements, partisanship">
     <meta name="robots" content="index, follow">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
@@ -31,7 +31,7 @@
                     <ol class="drop-menu mode-type" aria-label="Map mode selection">
                         <li><a href="#" class="selected unclickable" aria-label="Select Partisanship map mode">Partisanship</a></li>
                         <li><a href="#" aria-label="Select Vacancies map mode">Vacancies</a></li>
-                        <li><a href="#" aria-label="Select Retirements map mode">Future Vacancies</a></li>
+                        <li><a href="#" aria-label="Select Retirements map mode">Retirements</a></li>
                         <li><a href="#" aria-label="Select No Vacancies map mode">Filled Vacancies</a></li>
                     </ol>
                 </li>
@@ -85,7 +85,6 @@
             </p>
         </div>
     </div>
-    <div class="unavailable hidden">[COMING SOON]</div>
     <div id="map" aria-label="Interactive map of U.S. courts"></div>
     <div class="map-legend" id="legend1">
         <p><strong>Legend</strong></p>
@@ -98,6 +97,12 @@
         <p style="color: #818089;">One Vacancy</p>
         <p style="color: #F53778;">Two Vacancies</p>
         <p style="color: #9C0B0A;">Three+ Vacancies</p>
+    </div>
+    <div class="map-legend hidden" id="legend3">
+        <p><strong>Legend</strong></p>
+        <p style="color: #818089;">One Retirement</p>
+        <p style="color: #F53778;">Two Retirements</p>
+        <p style="color: #9C0B0A;">Three+ Retirements</p>
     </div>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="./script.js"></script>

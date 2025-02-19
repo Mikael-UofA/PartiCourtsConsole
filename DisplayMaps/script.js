@@ -13,7 +13,8 @@ const geojsonPaths = {
 };
 const colorMappings = {
     partisanship: { '1': 'blue', '-1': 'red', '0': 'purple' },
-    vacancies: { '0': '#FFFFFF', '1': '#818089', '2': '#F53778' }
+    vacancies: { '0': '#FFFFFF', '1': '#818089', '2': '#F53778' },
+    retirements: { '0': '#FFFFFF', '1': '#818089', '2': '#F53778' } 
 };
 const defaultColors = '#9C0B0A';
 let currentSettings = {
@@ -31,10 +32,10 @@ const elements = {
     modeDisplay: document.querySelector('.mode-display'),
     courtLinks: document.querySelectorAll('.court-type a'),
     modeLinks: document.querySelectorAll('.mode-type a'),
-    notImplemented: document.querySelector('.unavailable'),
     legends: {
         legend1: document.getElementById('legend1'),
-        legend2: document.getElementById('legend2')
+        legend2: document.getElementById('legend2'),
+        legend3: document.getElementById('legend3')
     }
 };
 
@@ -93,11 +94,6 @@ function handleModeChange(event, link) {
 
     updateLegend(currentSettings.mode);
     refreshMap();
-    if (link.textContent == "Future Vacancies") {
-        elements.notImplemented.classList.remove("hidden");
-    } else {
-        elements.notImplemented.classList.add("hidden");
-    }
 }
 
 // Update Selected State
@@ -110,6 +106,7 @@ function updateSelection(links, selectedLink) {
 function getColorMapping(mode) {
     switch (mode) {
         case 'VACANCIES': return colorMappings.vacancies;
+        case 'RETIREMENTS': return colorMappings.retirements;
         default: return colorMappings.partisanship;
     }
 }
@@ -117,9 +114,11 @@ function getColorMapping(mode) {
 // Update Legend Visibility
 function updateLegend(mode) {
     const { legend1, legend2 } = elements.legends;
-    legend1.classList.toggle('hidden', mode !== 'PARTISANSHIP');
-    legend2.classList.toggle('hidden', mode === 'PARTISANSHIP');
+    legend1.classList.toggle('hidden', !(mode === 'PARTISANSHIP' || mode === 'FILLED VACANCIES'));
+    legend2.classList.toggle('hidden', mode !== 'VACANCIES');
+    legend3.classList.toggle('hidden', mode !== 'RETIREMENTS');
 }
+
 
 // Clear Map Layers
 function clearMap() {
@@ -155,8 +154,10 @@ function loadGeoJSON(path) {
 
 // Determine Feature Coloring Property
 function getColoringProperty(feature) {
-    return currentSettings.mode === 'FILLED VACANCIES'
+    return currentSettings.mode === "FILLED VACANCIES"
         ? getPartisanshipIfFilled(feature)
+        : currentSettings.mode === "RETIREMENTS"
+        ? getRetirements(feature)
         : feature.properties[currentSettings.mode];
 }
 
@@ -168,12 +169,21 @@ function getPartisanshipIfFilled(feature) {
     return partisanship > 0 ? 1 : partisanship < 0 ? -1 : 0;
 }
 
-function bindFeaturePopup(feature, layer) {
-    const { NAME, FID, CHIEF_JUDGE, ACTIVE_JUDGES, VACANCIES, SENIOR_ELIGIBLE_JUDGES, SUPERVISING_JUSTICE } = feature.properties;
+// Get Retirements
+function getRetirements(feature) {
+    const retirements = feature.properties.DEMRETIRING + feature.properties.GOPRETIRING;
+    console.log(feature.properties.NAME + ": " + retirements)
+    return retirements;
+}
 
+function bindFeaturePopup(feature, layer) {
+    const { NAME, CHIEF_JUDGE, ACTIVE_JUDGES, VACANCIES, SENIOR_ELIGIBLE_JUDGES, SUPERVISING_JUSTICE,
+        DEMRETIRING, GOPRETIRING
+     } = feature.properties;
+    const retires = DEMRETIRING + GOPRETIRING
     const content = currentSettings.geoPath === geojsonPaths.district
-        ? `<h3>${NAME}</h3><p>FID: ${FID}</p><p>CHIEF JUDGE: ${CHIEF_JUDGE}</p><p>ACTIVE JUDGES: ${ACTIVE_JUDGES}</p><p>VACANCIES: ${VACANCIES}</p><p>SENIOR ELIGIBLE JUDGES: ${SENIOR_ELIGIBLE_JUDGES}</p>`
-        : `<h3>${NAME}</h3><p>SUPERVISING JUSTICE: ${SUPERVISING_JUSTICE}</p><p>CHIEF JUDGE: ${CHIEF_JUDGE}</p><p>ACTIVE JUDGES: ${ACTIVE_JUDGES}</p><p>VACANCIES: ${VACANCIES}</p><p>SENIOR ELIGIBLE JUDGES: ${SENIOR_ELIGIBLE_JUDGES}</p>`;
+        ? `<h3>${NAME}</h3><p>CHIEF JUDGE: ${CHIEF_JUDGE}</p><p>ACTIVE JUDGES: ${ACTIVE_JUDGES}</p><p>SENIOR ELIGIBLE JUDGES: ${SENIOR_ELIGIBLE_JUDGES}</p><p>VACANCIES: ${VACANCIES}</p><p>RETIREMENTS: ${retires}</p>`
+        : `<h3>${NAME}</h3><p>SUPERVISING JUSTICE: ${SUPERVISING_JUSTICE}</p><p>CHIEF JUDGE: ${CHIEF_JUDGE}</p><p>ACTIVE JUDGES: ${ACTIVE_JUDGES}</p><p>SENIOR ELIGIBLE JUDGES: ${SENIOR_ELIGIBLE_JUDGES}</p><p>VACANCIES: ${VACANCIES}</p><p>RETIREMENTS: ${retires}</p></p>`;
     
     layer.bindPopup(content);
 }
