@@ -59,7 +59,9 @@ namespace PrepareGeojson
                         { "VACANCIES", currentCourt.GetNumberOfVacancies() },
                         { "DEMJUDGES", currentCourt.DEMJudges },
                         { "GOPJUDGES", currentCourt.GOPJudges },
-                        { "PARTISANSHIP", currentCourt.FindPartisanshipOfCourt() }
+                        { "PARTISANSHIP", currentCourt.FindPartisanshipOfCourt() },
+                        { "DEMRETIRING", currentCourt.DEMRetiring},
+                        { "GOPRETIRING", currentCourt.GOPRetiring}
                     };
                         Feature newFeature = new Feature(feature.Type, newProperties, feature.Geometry);
                         geo2.Features.Add(newFeature);
@@ -101,7 +103,9 @@ namespace PrepareGeojson
                         { "VACANCIES", currentCourt.GetNumberOfVacancies() },
                         { "DEMJUDGES", currentCourt.DEMJudges },
                         { "GOPJUDGES", currentCourt.GOPJudges },
-                        { "PARTISANSHIP", currentCourt.FindPartisanshipOfCourt() }
+                        { "PARTISANSHIP", currentCourt.FindPartisanshipOfCourt() },
+                        { "DEMRETIRING", currentCourt.DEMRetiring},
+                        { "GOPRETIRING", currentCourt.GOPRetiring}
                     };
                         Feature newFeature = new Feature(feature.Type, newProperties, feature.Geometry);
                         geo2.Features.Add(newFeature);
