@@ -7,7 +7,6 @@ namespace PrepareGeojson
     {
         private List<DistrictCourt> dcourts = new List<DistrictCourt>();
         private List<CircuitCourt> ccourts = new List<CircuitCourt>();
-        private DataAccess dataAccess2 = new DataAccess();
 
         public Dashboard2()
         {
@@ -82,7 +81,7 @@ namespace PrepareGeojson
             ChangeStatus(0);
             try
             {
-                dcourts = dataAccess2.GetDistrictCourts();
+                dcourts = DataAccess.GetDistrictCourts();
                 ChangeStatus(1);
 
                 DCourtsButton.Enabled = false;
@@ -100,7 +99,7 @@ namespace PrepareGeojson
             ChangeStatus(0);
             try
             {
-                ccourts = dataAccess2.GetCircuitCourts();
+                ccourts = DataAccess.GetCircuitCourts();
                 ChangeStatus(1);
 
                 CCourtsButton.Enabled = false;
